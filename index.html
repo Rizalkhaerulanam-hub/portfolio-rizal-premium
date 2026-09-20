@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="id" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Portofolio Rizal Khaerul Anam — Informatics Graduate, Web Developer, dan Tech Enthusiast."
+    />
+    <meta name="theme-color" content="#07111f" />
+    <title>Rizal Khaerul Anam — Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <div class="noise" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="container nav">
+        <a class="brand" href="#home" aria-label="Rizal Khaerul Anam">
+          <span class="brand-mark">RK</span>
+          <span class="brand-name">Rizal Khaerul Anam</span>
+        </a>
+
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          aria-label="Buka menu"
+          aria-expanded="false"
+        >
+          <span></span><span></span><span></span>
+        </button>
+
+        <nav class="nav-menu" id="navMenu">
+          <a href="#home" class="nav-link active">Beranda</a>
+          <a href="#about" class="nav-link">Tentang</a>
+          <a href="#projects" class="nav-link">Proyek</a>
+          <a href="#skills" class="nav-link">Keahlian</a>
+          <a href="#journey" class="nav-link">Perjalanan</a>
+          <a href="#contact" class="nav-link">Kontak</a>
+          <a class="nav-cv" href="assets/Rizal-Khaerul-Anam-CV.pdf" download
+            >Download CV</a
+          >
+        </nav>
+
+        <button class="theme-toggle" id="themeToggle" aria-label="Ganti tema">
+          <span class="theme-icon">☼</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero section" id="home">
+        <div class="hero-orb orb-one"></div>
+        <div class="hero-orb orb-two"></div>
+        <div class="container hero-grid">
+          <div class="hero-copy reveal">
+            <p class="eyebrow"><span></span> HALO, SAYA RIZAL</p>
+            <h1>Building digital experiences that <em>matter.</em></h1>
+            <p class="hero-role">
+              Lulusan Informatika <b>·</b> Web Developer <b>·</b> Tech
+              Enthusiast
+            </p>
+            <p class="hero-text">
+              Saya membangun website dan solusi digital yang cepat, modern,
+              responsif, dan berorientasi pada pengalaman pengguna.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#projects" class="btn btn-primary"
+                >Lihat Proyek <span>↗</span></a
+              >
+              <a href="#contact" class="btn btn-ghost">Mari Terhubung</a>
+            </div>
+
+            <div class="social-row">
+              <a href="#" aria-label="GitHub">GH</a>
+              <a href="#" aria-label="LinkedIn">in</a>
+              <a href="#" aria-label="Instagram">ig</a>
+              <a href="mailto:rizal.khaerulanam@gmail.com" aria-label="Email"
+                >@</a
+              >
+            </div>
+          </div>
+
+          <div class="hero-visual reveal reveal-delay">
+            <div class="visual-ring ring-a"></div>
+            <div class="visual-ring ring-b"></div>
+            <div class="profile-card">
+              <div class="profile-top">
+                <span>AVAILABLE FOR WORK</span><i></i>
+              </div>
+              <div class="profile-photo">
+                <img
+                  src="assets/profile.svg"
+                  alt="Foto profil Rizal Khaerul Anam"
+                />
+              </div>
+              <div class="profile-bottom">
+                <strong>Rizal Khaerul Anam</strong>
+                <span>Informatics Graduate</span>
+              </div>
+            </div>
+            <div class="floating-chip chip-code">
+              <span>&lt;/&gt;</span> Clean Code
+            </div>
+            <div class="floating-chip chip-ui"><span>✦</span> UI / UX</div>
+          </div>
+        </div>
+        <div class="scroll-cue">SCROLL <span></span></div>
+      </section>
+
+      <section class="section about" id="about">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="eyebrow"><span></span> TENTANG SAYA</p>
+            <h2>Lebih dari sekadar <em>kode.</em></h2>
+          </div>
+          <div class="about-grid">
+            <div class="about-copy reveal">
+              <p class="lead">
+                Saya Rizal Khaerul Anam, lulusan S1 Informatika dengan
+                ketertarikan pada pengembangan web, teknologi modern, dan
+                pemecahan masalah digital.
+              </p>
+              <p>
+                Bagi saya, teknologi adalah alat untuk menciptakan sesuatu yang
+                berguna. Saya senang mempelajari hal baru, bekerja secara
+                kolaboratif, dan mengubah ide menjadi produk digital yang mudah
+                digunakan.
+              </p>
+              <div class="mini-stats">
+                <div><strong>01</strong><span>Problem Solver</span></div>
+                <div><strong>02</strong><span>Continuous Learner</span></div>
+                <div><strong>03</strong><span>Team Player</span></div>
+              </div>
+            </div>
+            <div class="quote-card reveal reveal-delay">
+              <span class="quote-mark">“</span>
+              <p>
+                Teknologi bukan hanya tentang kode, tapi tentang bagaimana kita
+                membuat hidup orang lain menjadi lebih mudah.
+              </p>
+              <span>— Rizal Khaerul Anam</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section projects" id="projects">
+        <div class="container">
+          <div class="section-heading split reveal">
+            <div>
+              <p class="eyebrow"><span></span> SELECTED WORK</p>
+              <h2>Proyek yang <em>pernah saya bangun.</em></h2>
+            </div>
+            <p class="heading-note">
+              Eksplorasi proyek, teknologi, dan pendekatan yang saya gunakan.
+            </p>
+          </div>
+
+          <div class="project-grid">
+            <article class="project-card featured reveal">
+              <div class="project-image">
+                <img
+                  src="assets/project-campus.svg"
+                  alt="Preview Sistem Informasi Kampus"
+                />
+                <div class="project-overlay"><span>VIEW PROJECT ↗</span></div>
+              </div>
+              <div class="project-info">
+                <div>
+                  <span class="project-index">01</span
+                  ><span class="project-type">WEB APP</span>
+                </div>
+                <h3>Sistem Informasi Kampus</h3>
+                <p>
+                  Platform untuk mengelola data mahasiswa, dosen, mata kuliah,
+                  dan kebutuhan administrasi akademik.
+                </p>
+                <div class="tags">
+                  <span>Laravel</span><span>MySQL</span
+                  ><span>Tailwind CSS</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card reveal reveal-delay">
+              <div class="project-image">
+                <img
+                  src="assets/project-portfolio.svg"
+                  alt="Preview Website Portofolio"
+                />
+                <div class="project-overlay"><span>VIEW PROJECT ↗</span></div>
+              </div>
+              <div class="project-info">
+                <div>
+                  <span class="project-index">02</span
+                  ><span class="project-type">PERSONAL BRAND</span>
+                </div>
+                <h3>Website Portofolio</h3>
+                <p>
+                  Website personal untuk membangun identitas profesional dan
+                  menampilkan karya secara terstruktur.
+                </p>
+                <div class="tags">
+                  <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card reveal">
+              <div class="project-image">
+                <img
+                  src="assets/project-todo.svg"
+                  alt="Preview Aplikasi To-Do List"
+                />
+                <div class="project-overlay"><span>VIEW PROJECT ↗</span></div>
+              </div>
+              <div class="project-info">
+                <div>
+                  <span class="project-index">03</span
+                  ><span class="project-type">WEB APP</span>
+                </div>
+                <h3>Aplikasi To-Do List</h3>
+                <p>
+                  Aplikasi sederhana untuk mencatat, mengatur, dan memantau
+                  kegiatan harian secara praktis.
+                </p>
+                <div class="tags">
+                  <span>React</span><span>JavaScript</span
+                  ><span>LocalStorage</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section skills" id="skills">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="eyebrow"><span></span> TECH STACK</p>
+            <h2>Tools untuk <em>mewujudkan ide.</em></h2>
+          </div>
+
+          <div class="skills-layout">
+            <div class="skill-intro reveal">
+              <p class="lead">
+                Teknologi yang saya gunakan untuk membangun interface, aplikasi
+                web, hingga backend.
+              </p>
+              <div class="stack-marquee">
+                <span>HTML5</span><i>✦</i><span>CSS3</span><i>✦</i
+                ><span>JAVASCRIPT</span><i>✦</i><span>REACT</span><i>✦</i
+                ><span>NEXT.JS</span>
+              </div>
+            </div>
+            <div class="skill-list reveal reveal-delay">
+              <div class="skill-item">
+                <span class="skill-number">01</span><strong>HTML / CSS</strong
+                ><small>Structure & Visual Design</small><b>95%</b>
+              </div>
+              <div class="skill-item">
+                <span class="skill-number">02</span><strong>JavaScript</strong
+                ><small>Interactive Web Experience</small><b>88%</b>
+              </div>
+              <div class="skill-item">
+                <span class="skill-number">03</span
+                ><strong>React / Next.js</strong
+                ><small>Modern Frontend Development</small><b>84%</b>
+              </div>
+              <div class="skill-item">
+                <span class="skill-number">04</span
+                ><strong>Laravel / Node.js</strong><small>Backend & API</small
+                ><b>80%</b>
+              </div>
+              <div class="skill-item">
+                <span class="skill-number">05</span><strong>MySQL / Git</strong
+                ><small>Database & Version Control</small><b>86%</b>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section journey" id="journey">
+        <div class="container">
+          <div class="section-heading reveal">
+            <p class="eyebrow"><span></span> MY JOURNEY</p>
+            <h2>Belajar, bertumbuh, <em>berkarya.</em></h2>
+          </div>
+
+          <div class="journey-grid">
+            <div class="timeline reveal">
+              <div class="timeline-item">
+                <span class="timeline-dot"></span>
+                <div>
+                  <small>2020 — 2024</small>
+                  <h3>S1 Informatika</h3>
+                  <p>Universitas [Nama Universitas]</p>
+                </div>
+                <span class="timeline-badge">LULUSAN</span>
+              </div>
+              <div class="timeline-item">
+                <span class="timeline-dot"></span>
+                <div>
+                  <small>FEB 2023 — MEI 2023</small>
+                  <h3>Magang — Web Developer</h3>
+                  <p>PT. Teknologi Indonesia</p>
+                </div>
+                <span class="timeline-badge">EXPERIENCE</span>
+              </div>
+            </div>
+
+            <div class="certs reveal reveal-delay">
+              <div class="subheading">
+                <span>SERTIFIKAT</span><a href="#">Lihat semua ↗</a>
+              </div>
+              <div class="cert-card">
+                <b>DC</b>
+                <div>
+                  <strong>Belajar Dasar Pemrograman Web</strong
+                  ><small>Dicoding · 2023</small>
+                </div>
+                <span>↗</span>
+              </div>
+              <div class="cert-card">
+                <b>DC</b>
+                <div>
+                  <strong>JavaScript Developer</strong
+                  ><small>Dicoding · 2023</small>
+                </div>
+                <span>↗</span>
+              </div>
+              <div class="cert-card">
+                <b>GG</b>
+                <div>
+                  <strong>Dasar-Dasar IT Support</strong
+                  ><small>Google Digital Garage · 2023</small>
+                </div>
+                <span>↗</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact" id="contact">
+        <div class="container contact-wrap">
+          <div class="contact-copy reveal">
+            <p class="eyebrow"><span></span> LET'S CONNECT</p>
+            <h2>Punya ide? Mari buat sesuatu yang <em>berarti.</em></h2>
+            <p>
+              Terbuka untuk peluang kerja, freelance, kolaborasi proyek, maupun
+              diskusi seputar teknologi.
+            </p>
+            <a class="email-link" href="mailto:rizal.khaerulanam@gmail.com"
+              >rizal.khaerulanam@gmail.com ↗</a
+            >
+          </div>
+
+          <form class="contact-form reveal reveal-delay" id="contactForm">
+            <label
+              >Nama<input
+                type="text"
+                name="name"
+                placeholder="Nama Anda"
+                required
+            /></label>
+            <label
+              >Email<input
+                type="email"
+                name="email"
+                placeholder="email@domain.com"
+                required
+            /></label>
+            <label
+              >Pesan<textarea
+                name="message"
+                placeholder="Ceritakan kebutuhan atau ide Anda..."
+                required
+              ></textarea>
+            </label>
+            <button class="btn btn-primary" type="submit">
+              Kirim Pesan <span>↗</span>
+            </button>
+            <small class="form-note"
+              >Form ini akan membuka aplikasi email Anda.</small
+            >
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <a
+      class="whatsapp"
+      href="https://wa.me/6281234567890?text=Halo%20Rizal%2C%20saya%20ingin%20berdiskusi%20tentang%20proyek."
+      target="_blank"
+      rel="noopener"
+      aria-label="Hubungi Rizal melalui WhatsApp"
+    >
+      <span class="wa-icon">◔</span><span class="wa-text">Chat WhatsApp</span>
+    </a>
+
+    <footer>
+      <div class="container footer-inner">
+        <div>
+          <span class="brand-mark">RK</span><strong>Rizal Khaerul Anam</strong
+          ><small>Informatics Graduate · Build Better Solutions</small>
+        </div>
+        <div class="footer-links">
+          <a href="#home">Back to top ↑</a
+          ><span>© 2026 Rizal Khaerul Anam</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
