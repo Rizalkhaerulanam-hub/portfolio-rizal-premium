@@ -30,6 +30,7 @@
         <button
           class="menu-toggle"
           id="menuToggle"
+          type="button"
           aria-label="Buka menu"
           aria-expanded="false"
         >
@@ -48,7 +49,12 @@
           >
         </nav>
 
-        <button class="theme-toggle" id="themeToggle" aria-label="Ganti tema">
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Ganti tema"
+        >
           <span class="theme-icon">☼</span>
         </button>
       </div>
@@ -86,21 +92,21 @@
               <a
                 href="https://github.com/Rizalkhaerulanam-hub"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 aria-label="GitHub"
                 >GH</a
               >
               <a
                 href="https://www.linkedin.com/in/rizal-khaerul-anam-7a9240411?utm_source=share_via&utm_content=profile&utm_medium=member_android"
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 aria-label="LinkedIn"
                 >in</a
               >
               <a
                 href="https://www.instagram.com/_khaeruull?stkn=MWhtMHY5NnFraHV6bA=="
                 target="_blank"
-                rel="noopener"
+                rel="noopener noreferrer"
                 aria-label="Instagram"
                 >ig</a
               >
@@ -188,13 +194,21 @@
 
           <!--  projects  -->
           <div class="project-grid">
+            <!--  projects 01 -->
             <article class="project-card featured reveal">
               <div class="project-image">
                 <img
                   src="assets/Project/01.png"
                   alt="Preview WEBSITE IMM BUYA HAMKA"
                 />
-                <div class="project-overlay"><span>VIEW PROJECT ↗</span></div>
+                <!-- PERUBAHAN: Tag <div> diganti <a>, ditambah href dan target="_blank" -->
+                <a
+                  href="https://rizalkhaerulanam-hub.github.io/website-imm/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-overlay"
+                  ><span>VIEW PROJECT ↗</span></a
+                >
               </div>
               <div class="project-info">
                 <div>
@@ -220,7 +234,14 @@
                   src="assets/Project/02.png"
                   alt="Preview Website Portofolio"
                 />
-                <div class="project-overlay"><span>VIEW PROJECT ↗</span></div>
+                <!-- PERUBAHAN: Tag <div> diganti <a> -->
+                <a
+                  href="https://github.com/Rizalkhaerulanam-hub/portfolio-rizal-premium"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-overlay"
+                  ><span>VIEW PROJECT ↗</span></a
+                >
               </div>
               <div class="project-info">
                 <div>
@@ -245,7 +266,14 @@
                   src="assets/Project/03.png"
                   alt="Game Quiz Berbasis Scratch"
                 />
-                <div class="project-overlay"><span>VIEW PROJECT ↗</span></div>
+                <!-- PERUBAHAN: Tag <div> diganti <a> -->
+                <a
+                  href="https://scratch.mit.edu/projects/1331678652/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="project-overlay"
+                  ><span>VIEW PROJECT ↗</span></a
+                >
               </div>
               <div class="project-info">
                 <div>
@@ -267,12 +295,16 @@
             <!--  projects 04 -->
             <article class="project-card reveal reveal-delay">
               <div class="project-image">
-                <img
-                  src="assets/Project/04.png
-                "
-                  alt="Preview desain canva"
-                />
-                <div class="project-overlay"><span>VIEW PROJECT ↗</span></div>
+                <img src="assets/Project/04.png" alt="Preview desain canva" />
+                <!-- PERUBAHAN: Tag <div> diganti <a> -->
+                <!-- Ganti bagian link di Proyek 04 menjadi ini -->
+                <a
+                  href="desain-canva.html"
+                  target="_blank"
+                  class="project-overlay"
+                >
+                  <span>VIEW PROJECT ↗</span>
+                </a>
               </div>
               <div class="project-info">
                 <div>
@@ -289,12 +321,20 @@
                 </div>
               </div>
             </article>
-            <!--  Projek 5-->
 
+            <!--  projects 05 -->
             <article class="project-card reveal">
               <div class="project-image">
                 <img src="assets/Project/05.png" alt="Preview video editing" />
-                <div class="project-overlay"><span>VIEW PROJECT ↗</span></div>
+                <!-- PERUBAHAN: Tag <div> diganti <a> -->
+
+                <a
+                  href="video-editing.html"
+                  target="_blank"
+                  class="project-overlay"
+                >
+                  <span>VIEW PROJECT ↗</span>
+                </a>
               </div>
               <div class="project-info">
                 <div>
@@ -458,7 +498,7 @@
       class="whatsapp"
       href="https://wa.me/6285865565047?text=Halo%20Rizal%2C%20saya%20ingin%20berdiskusi%20tentang%20proyek."
       target="_blank"
-      rel="noopener"
+      rel="noopener noreferrer"
       aria-label="Hubungi Rizal melalui WhatsApp"
     >
       <span class="wa-icon">◔</span><span class="wa-text">Chat WhatsApp</span>
