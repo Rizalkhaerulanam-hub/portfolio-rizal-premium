@@ -10,7 +10,10 @@
         const saved = localStorage.getItem("rizal-theme");
         if (saved === "light" || saved === "dark") {
           document.documentElement.dataset.theme = saved;
-        } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
+        } else if (
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: light)").matches
+        ) {
           document.documentElement.dataset.theme = "light";
         }
       })();
@@ -29,10 +32,22 @@
           <a href="desain-canva.html" class="nav-link">Canva</a>
           <a href="video-editing.html" class="nav-link">Video Editing</a>
         </nav>
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ganti tema" aria-pressed="false">
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Ganti tema"
+          aria-pressed="false"
+        >
           <span class="theme-icon" aria-hidden="true">☼</span>
         </button>
-        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Buka menu" aria-expanded="false">
+        <button
+          class="menu-toggle"
+          id="menuToggle"
+          type="button"
+          aria-label="Buka menu"
+          aria-expanded="false"
+        >
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -49,21 +64,64 @@
             <a href="index.html" class="back-link">← Kembali ke Beranda</a>
             <p class="eyebrow"><span></span> KUMPULAN KARYA</p>
             <h1>Desain <em>Canva.</em></h1>
-            <p class="heading-note">Berikut adalah beberapa hasil desain grafis, poster, dan infografis yang saya buat menggunakan Canva.</p>
+            <p class="heading-note">
+              Berikut adalah beberapa hasil desain grafis, poster, dan
+              infografis yang saya buat menggunakan Canva.
+            </p>
           </div>
 
           <!-- Tempat Anda menaruh gambar-gambar desain nantinya -->
           <div class="project-grid gallery-grid">
-            <article class="project-card featured"><div class="project-image"><img src="assets/Project/01.png" alt="Desain proyek 01" loading="lazy"></div></article>
-            <article class="project-card"><div class="project-image"><img src="assets/Project/02.png" alt="Desain proyek 02" loading="lazy"></div></article>
-            <article class="project-card"><div class="project-image"><img src="assets/Project/03.png" alt="Desain proyek 03" loading="lazy"></div></article>
-            <article class="project-card"><div class="project-image"><img src="assets/Project/04.png" alt="Desain proyek 04" loading="lazy"></div></article>
-            <article class="project-card"><div class="project-image"><img src="assets/Project/05.png" alt="Desain proyek 05" loading="lazy"></div></article>
+            <article class="project-card featured">
+              <div class="project-image">
+                <img
+                  src="assets/Project/01.png"
+                  alt="Desain proyek 01"
+                  loading="lazy"
+                />
+              </div>
+            </article>
+            <article class="project-card">
+              <div class="project-image">
+                <img
+                  src="assets/Project/02.png"
+                  alt="Desain proyek 02"
+                  loading="lazy"
+                />
+              </div>
+            </article>
+            <article class="project-card">
+              <div class="project-image">
+                <img
+                  src="assets/Project/03.png"
+                  alt="Desain proyek 03"
+                  loading="lazy"
+                />
+              </div>
+            </article>
+            <article class="project-card">
+              <div class="project-image">
+                <img
+                  src="assets/Project/04.png"
+                  alt="Desain proyek 04"
+                  loading="lazy"
+                />
+              </div>
+            </article>
+            <article class="project-card">
+              <div class="project-image">
+                <img
+                  src="assets/Project/05.png"
+                  alt="Desain proyek 05"
+                  loading="lazy"
+                />
+              </div>
+            </article>
           </div>
         </div>
       </section>
     </main>
-  
+
     <footer class="page-footer">
       <div class="container footer-inner">
         <div>
