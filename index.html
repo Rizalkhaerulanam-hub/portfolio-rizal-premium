@@ -19,7 +19,10 @@
         const saved = localStorage.getItem("rizal-theme");
         if (saved === "light" || saved === "dark") {
           document.documentElement.dataset.theme = saved;
-        } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches) {
+        } else if (
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: light)").matches
+        ) {
           document.documentElement.dataset.theme = "light";
         }
       })();
@@ -361,6 +364,64 @@
                 </div>
               </div>
             </article>
+            <!--  projects 06 -->
+            <article class="project-card reveal reveal-delay">
+              <div class="project-image">
+                <img src="assets/Project/06.png" alt="Preview foto editing" />
+                <!-- PERUBAHAN: Tag <div> diganti <a> -->
+                <a
+                  href="fotografer.html"
+                  target="_self"
+                  class="project-overlay"
+                >
+                  <span>VIEW PROJECT ↗</span>
+                </a>
+              </div>
+              <div class="project-info">
+                <div>
+                  <span class="project-index">06</span
+                  ><span class="project-type">Foto Grafer</span>
+                </div>
+                <h3>Foto Grafer</h3>
+                <p>
+                  Foto editing untuk berbagai kebutuhan, termasuk retouching,
+                  manipulasi, dan optimasi gambar.
+                </p>
+                <div class="tags">
+                  <span>Photoshop</span><span>Foto Grafer</span
+                  ><span>Fotografi</span>
+                </div>
+              </div>
+            </article>
+
+            <!--  projects 07 -->
+            <article class="project-card reveal">
+              <div class="project-image">
+                <img src="assets/Project/07.png" alt="Preview video editing" />
+                <!-- PERUBAHAN: Tag <div> diganti <a> -->
+                <a
+                  href="videografer.html"
+                  target="_self"
+                  class="project-overlay"
+                >
+                  <span>VIEW PROJECT ↗</span>
+                </a>
+              </div>
+              <div class="project-info">
+                <div>
+                  <span class="project-index">07</span
+                  ><span class="project-type">Videografer</span>
+                </div>
+                <h3>Videografer</h3>
+                <p>
+                  Videografi untuk berbagai kebutuhan, termasuk promosi,
+                  tutorial, dan konten sosial media.
+                </p>
+                <div class="tags">
+                  <span>CapCut</span><span>Videografer</span>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -381,7 +442,7 @@
               <div class="stack-marquee">
                 <span>HTML</span><i>✦</i><span>CSS</span><i>✦</i
                 ><span>JAVASCRIPT</span><i>✦</i><span>Canva</span><i>✦</i
-                ><span>Capcut</span><span>✦</span><span>video Grafer</span
+                ><span>Capcut</span><span>✦</span><span> Videografer</span
                 ><i>✦</i><span>Desain Grafis</span><i>✦</i
                 ><span>Foto Grafer</span><i>✦</i>
               </div>
