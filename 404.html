@@ -1,0 +1,899 @@
+```html
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>404 — RK Mini Game</title>
+
+    <meta
+      name="description"
+      content="Halaman 404 interaktif dengan mini game RK."
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #070a12;
+        --card: rgba(255, 255, 255, 0.055);
+        --border: rgba(255, 255, 255, 0.12);
+        --text: #ffffff;
+        --muted: #9ca3af;
+        --accent: #6c63ff;
+        --accent2: #00d4ff;
+      }
+
+      html,
+      body {
+        width: 100%;
+        min-height: 100%;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+
+        background:
+          radial-gradient(
+            circle at 20% 10%,
+            rgba(108, 99, 255, 0.18),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at 80% 90%,
+            rgba(0, 212, 255, 0.12),
+            transparent 30%
+          ),
+          var(--bg);
+
+        color: var(--text);
+
+        overflow-x: hidden;
+      }
+
+      /* =========================
+           BACKGROUND
+        ========================= */
+
+      .bg-circle {
+        position: fixed;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+        filter: blur(2px);
+      }
+
+      .bg-circle.one {
+        width: 300px;
+        height: 300px;
+        top: -150px;
+        left: -100px;
+        background: rgba(108, 99, 255, 0.08);
+      }
+
+      .bg-circle.two {
+        width: 260px;
+        height: 260px;
+        right: -100px;
+        bottom: -100px;
+        background: rgba(0, 212, 255, 0.07);
+      }
+
+      /* =========================
+           MAIN
+        ========================= */
+
+      .wrapper {
+        position: relative;
+        z-index: 2;
+
+        width: min(900px, 94%);
+        margin: auto;
+
+        padding: 40px 0 30px;
+
+        text-align: center;
+      }
+
+      /* =========================
+           LOGO
+        ========================= */
+
+      .logo {
+        width: 55px;
+        height: 55px;
+
+        margin: 0 auto 18px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 16px;
+
+        border: 1px solid var(--border);
+
+        background: rgba(255, 255, 255, 0.06);
+
+        backdrop-filter: blur(15px);
+
+        font-size: 19px;
+        font-weight: 800;
+
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+      }
+
+      /* =========================
+           404
+        ========================= */
+
+      .error-number {
+        font-size: clamp(90px, 18vw, 180px);
+
+        line-height: 0.85;
+
+        font-weight: 900;
+
+        letter-spacing: -10px;
+
+        background: linear-gradient(135deg, #ffffff, #6c63ff 45%, #00d4ff);
+
+        -webkit-background-clip: text;
+        background-clip: text;
+
+        color: transparent;
+
+        user-select: none;
+      }
+
+      h1 {
+        margin-top: 25px;
+
+        font-size: clamp(24px, 4vw, 36px);
+
+        font-weight: 800;
+      }
+
+      .description {
+        max-width: 600px;
+
+        margin: 12px auto 25px;
+
+        color: var(--muted);
+
+        font-size: 14px;
+
+        line-height: 1.7;
+      }
+
+      /* =========================
+           GAME CARD
+        ========================= */
+
+      .game-card {
+        width: 100%;
+
+        margin-top: 25px;
+
+        padding: 18px;
+
+        border-radius: 22px;
+
+        background: var(--card);
+
+        border: 1px solid var(--border);
+
+        backdrop-filter: blur(20px);
+
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+      }
+
+      .game-header {
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        margin-bottom: 12px;
+
+        padding: 0 4px;
+      }
+
+      .game-title {
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .score-box {
+        display: flex;
+
+        gap: 15px;
+
+        color: var(--muted);
+
+        font-size: 12px;
+      }
+
+      .score-box strong {
+        color: white;
+      }
+
+      /* =========================
+           GAME AREA
+        ========================= */
+
+      #game {
+        position: relative;
+
+        width: 100%;
+
+        height: 280px;
+
+        overflow: hidden;
+
+        border-radius: 16px;
+
+        background: linear-gradient(180deg, #10152a, #090c16);
+
+        border: 1px solid rgba(255, 255, 255, 0.08);
+
+        cursor: pointer;
+
+        touch-action: manipulation;
+      }
+
+      /* stars */
+
+      .star {
+        position: absolute;
+
+        width: 2px;
+        height: 2px;
+
+        background: white;
+
+        border-radius: 50%;
+
+        opacity: 0.5;
+      }
+
+      .star:nth-child(1) {
+        top: 20%;
+        left: 15%;
+      }
+
+      .star:nth-child(2) {
+        top: 30%;
+        left: 45%;
+      }
+
+      .star:nth-child(3) {
+        top: 15%;
+        left: 75%;
+      }
+
+      .star:nth-child(4) {
+        top: 50%;
+        left: 85%;
+      }
+
+      .star:nth-child(5) {
+        top: 35%;
+        left: 60%;
+      }
+
+      /* ground */
+
+      .ground {
+        position: absolute;
+
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        height: 38px;
+
+        background: linear-gradient(180deg, #161c30, #0b0e18);
+
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      /* player */
+
+      #player {
+        position: absolute;
+
+        left: 65px;
+        bottom: 38px;
+
+        width: 42px;
+        height: 42px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 12px;
+
+        background: linear-gradient(135deg, #6c63ff, #00d4ff);
+
+        box-shadow: 0 8px 25px rgba(108, 99, 255, 0.35);
+
+        font-size: 19px;
+
+        z-index: 5;
+      }
+
+      #player::after {
+        content: "RK";
+
+        font-size: 10px;
+        font-weight: 900;
+
+        color: white;
+      }
+
+      /* obstacle */
+
+      .obstacle {
+        position: absolute;
+
+        bottom: 38px;
+
+        width: 25px;
+
+        height: 42px;
+
+        border-radius: 7px 7px 3px 3px;
+
+        background: linear-gradient(180deg, #ff5f6d, #c92a3b);
+
+        box-shadow: 0 7px 20px rgba(255, 70, 90, 0.25);
+      }
+
+      /* =========================
+           GAME MESSAGE
+        ========================= */
+
+      #message {
+        position: absolute;
+
+        inset: 0;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        flex-direction: column;
+
+        gap: 8px;
+
+        background: rgba(5, 7, 14, 0.45);
+
+        backdrop-filter: blur(2px);
+
+        z-index: 10;
+      }
+
+      #message h2 {
+        font-size: 23px;
+      }
+
+      #message p {
+        color: var(--muted);
+
+        font-size: 12px;
+      }
+
+      .start-button {
+        margin-top: 8px;
+
+        padding: 10px 18px;
+
+        border: none;
+
+        border-radius: 10px;
+
+        color: white;
+
+        font-weight: 700;
+
+        background: linear-gradient(135deg, var(--accent), #5148e5);
+
+        cursor: pointer;
+
+        transition: 0.25s;
+      }
+
+      .start-button:hover {
+        transform: translateY(-2px);
+
+        box-shadow: 0 10px 25px rgba(108, 99, 255, 0.3);
+      }
+
+      /* =========================
+           CONTROLS
+        ========================= */
+
+      .controls {
+        margin-top: 13px;
+
+        color: var(--muted);
+
+        font-size: 11px;
+      }
+
+      .key {
+        display: inline-block;
+
+        padding: 4px 7px;
+
+        margin: 0 2px;
+
+        border-radius: 5px;
+
+        border: 1px solid var(--border);
+
+        background: rgba(255, 255, 255, 0.05);
+
+        color: white;
+      }
+
+      /* =========================
+           BUTTONS
+        ========================= */
+
+      .buttons {
+        display: flex;
+
+        justify-content: center;
+
+        gap: 10px;
+
+        flex-wrap: wrap;
+
+        margin-top: 22px;
+      }
+
+      .btn {
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        padding: 12px 20px;
+
+        border-radius: 11px;
+
+        text-decoration: none;
+
+        font-size: 13px;
+
+        font-weight: 700;
+
+        transition: 0.3s;
+      }
+
+      .home-btn {
+        color: white;
+
+        background: linear-gradient(135deg, #6c63ff, #5148e5);
+
+        box-shadow: 0 8px 25px rgba(108, 99, 255, 0.2);
+      }
+
+      .home-btn:hover {
+        transform: translateY(-3px);
+      }
+
+      .restart-btn {
+        color: white;
+
+        border: 1px solid var(--border);
+
+        background: rgba(255, 255, 255, 0.05);
+
+        cursor: pointer;
+      }
+
+      .restart-btn:hover {
+        background: rgba(255, 255, 255, 0.09);
+
+        transform: translateY(-3px);
+      }
+
+      /* =========================
+           FOOTER
+        ========================= */
+
+      footer {
+        margin-top: 25px;
+
+        color: #606675;
+
+        font-size: 11px;
+      }
+
+      footer span {
+        color: #9ca3af;
+      }
+
+      /* =========================
+           MOBILE
+        ========================= */
+
+      @media (max-width: 600px) {
+        .wrapper {
+          padding-top: 25px;
+        }
+
+        .error-number {
+          letter-spacing: -6px;
+        }
+
+        .game-card {
+          padding: 12px;
+        }
+
+        #game {
+          height: 240px;
+        }
+
+        #player {
+          left: 35px;
+        }
+
+        .description {
+          padding: 0 10px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="bg-circle one"></div>
+    <div class="bg-circle two"></div>
+
+    <main class="wrapper">
+      <div class="logo">RK</div>
+
+      <div class="error-number">404</div>
+
+      <h1>Halaman Hilang 👀</h1>
+
+      <p class="description">
+        Halaman yang kamu cari tidak ditemukan. Daripada bingung, coba mainkan
+        game kecil ini sambil mencari jalan kembali.
+      </p>
+
+      <!-- GAME -->
+
+      <section class="game-card">
+        <div class="game-header">
+          <div class="game-title">🚀 RK Space Runner</div>
+
+          <div class="score-box">
+            <div>
+              SCORE:
+              <strong id="score">0</strong>
+            </div>
+
+            <div>
+              BEST:
+              <strong id="best">0</strong>
+            </div>
+          </div>
+        </div>
+
+        <div id="game">
+          <!-- Stars -->
+
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+
+          <!-- Player -->
+
+          <div id="player"></div>
+
+          <!-- Ground -->
+
+          <div class="ground"></div>
+
+          <!-- Start / Game Over -->
+
+          <div id="message">
+            <h2 id="messageTitle">🚀 Mulai Game</h2>
+
+            <p id="messageText">Hindari semua rintangan!</p>
+
+            <button class="start-button" id="startButton">MULAI</button>
+          </div>
+        </div>
+
+        <div class="controls">
+          Tekan
+          <span class="key">SPACE</span>
+          atau
+          <span class="key">↑</span>
+          untuk melompat · HP: tap layar
+        </div>
+      </section>
+
+      <!-- BUTTONS -->
+
+      <div class="buttons">
+        <a href="index.html" class="btn home-btn"> ← Kembali ke Beranda </a>
+
+        <button class="btn restart-btn" id="restartButton">↻ Main Lagi</button>
+      </div>
+
+      <footer>© 2026 <span>RK — Rizal Khaerul Anam</span></footer>
+    </main>
+
+    <script>
+      /* =========================================
+           ELEMENTS
+        ========================================= */
+
+      const game = document.getElementById("game");
+
+      const player = document.getElementById("player");
+
+      const scoreElement = document.getElementById("score");
+
+      const bestElement = document.getElementById("best");
+
+      const message = document.getElementById("message");
+
+      const messageTitle = document.getElementById("messageTitle");
+
+      const messageText = document.getElementById("messageText");
+
+      const startButton = document.getElementById("startButton");
+
+      const restartButton = document.getElementById("restartButton");
+
+      /* =========================================
+           GAME VARIABLES
+        ========================================= */
+
+      let playing = false;
+
+      let jumping = false;
+
+      let gameOver = false;
+
+      let score = 0;
+
+      let speed = 5;
+
+      let obstacleTimer;
+
+      let scoreTimer;
+
+      let bestScore = Number(localStorage.getItem("rk404Best")) || 0;
+
+      bestElement.textContent = bestScore;
+
+      /* =========================================
+           JUMP
+        ========================================= */
+
+      function jump() {
+        if (!playing || jumping) return;
+
+        jumping = true;
+
+        let position = 0;
+
+        const jumpUp = setInterval(() => {
+          position += 7;
+
+          player.style.bottom = 38 + position + "px";
+
+          if (position >= 115) {
+            clearInterval(jumpUp);
+
+            const fall = setInterval(() => {
+              position -= 7;
+
+              player.style.bottom = 38 + position + "px";
+
+              if (position <= 0) {
+                position = 0;
+
+                player.style.bottom = "38px";
+
+                clearInterval(fall);
+
+                jumping = false;
+              }
+            }, 18);
+          }
+        }, 18);
+      }
+
+      /* =========================================
+           CREATE OBSTACLE
+        ========================================= */
+
+      function createObstacle() {
+        if (!playing) return;
+
+        const obstacle = document.createElement("div");
+
+        obstacle.classList.add("obstacle");
+
+        game.appendChild(obstacle);
+
+        let position = game.offsetWidth;
+
+        obstacle.style.left = position + "px";
+
+        const move = setInterval(() => {
+          if (!playing) {
+            clearInterval(move);
+
+            obstacle.remove();
+
+            return;
+          }
+
+          position -= speed;
+
+          obstacle.style.left = position + "px";
+
+          /* collision */
+
+          const playerRect = player.getBoundingClientRect();
+
+          const obstacleRect = obstacle.getBoundingClientRect();
+
+          const collision =
+            playerRect.left < obstacleRect.right &&
+            playerRect.right > obstacleRect.left &&
+            playerRect.top < obstacleRect.bottom &&
+            playerRect.bottom > obstacleRect.top;
+
+          if (collision) {
+            clearInterval(move);
+
+            endGame();
+          }
+
+          if (position < -40) {
+            clearInterval(move);
+
+            obstacle.remove();
+          }
+        }, 20);
+
+        obstacleTimer = setTimeout(createObstacle, Math.random() * 1200 + 900);
+      }
+
+      /* =========================================
+           SCORE
+        ========================================= */
+
+      function startScore() {
+        scoreTimer = setInterval(() => {
+          if (!playing) return;
+
+          score++;
+
+          scoreElement.textContent = score;
+
+          /* increase difficulty */
+
+          if (score % 100 === 0) {
+            speed += 0.6;
+          }
+        }, 100);
+      }
+
+      /* =========================================
+           START GAME
+        ========================================= */
+
+      function startGame() {
+        clearTimeout(obstacleTimer);
+
+        clearInterval(scoreTimer);
+
+        document.querySelectorAll(".obstacle").forEach((item) => item.remove());
+
+        playing = true;
+
+        jumping = false;
+
+        gameOver = false;
+
+        score = 0;
+
+        speed = 5;
+
+        scoreElement.textContent = "0";
+
+        player.style.bottom = "38px";
+
+        message.style.display = "none";
+
+        createObstacle();
+
+        startScore();
+      }
+
+      /* =========================================
+           GAME OVER
+        ========================================= */
+
+      function endGame() {
+        if (!playing) return;
+
+        playing = false;
+
+        gameOver = true;
+
+        clearTimeout(obstacleTimer);
+
+        clearInterval(scoreTimer);
+
+        if (score > bestScore) {
+          bestScore = score;
+
+          localStorage.setItem("rk404Best", bestScore);
+
+          bestElement.textContent = bestScore;
+        }
+
+        messageTitle.textContent = "💥 Game Over!";
+
+        messageText.textContent = "Score kamu: " + score;
+
+        startButton.textContent = "MAIN LAGI";
+
+        message.style.display = "flex";
+      }
+
+      /* =========================================
+           EVENTS
+        ========================================= */
+
+      startButton.addEventListener("click", startGame);
+
+      restartButton.addEventListener("click", startGame);
+
+      game.addEventListener("click", () => {
+        if (!playing) {
+          startGame();
+        } else {
+          jump();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.code === "Space" || event.code === "ArrowUp") {
+          event.preventDefault();
+
+          if (!playing) {
+            startGame();
+          } else {
+            jump();
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
+```
