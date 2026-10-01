@@ -44,16 +44,25 @@
   });
 
   // Mobile navigation.
-  menuToggle?.addEventListener("click", () => {
-    const open = navMenu?.classList.toggle("open") ?? false;
+  function setMenu(open) {
+    if (!navMenu || !menuToggle) return;
+    navMenu.classList.toggle("open", open);
     menuToggle.setAttribute("aria-expanded", String(open));
     menuToggle.setAttribute("aria-label", open ? "Tutup menu" : "Buka menu");
+  }
+
+  setMenu(false);
+  menuToggle?.addEventListener("click", () => {
+    setMenu(!(navMenu?.classList.contains("open") ?? false));
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setMenu(false);
   });
 
   navMenu?.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
-      navMenu.classList.remove("open");
-      menuToggle?.setAttribute("aria-expanded", "false");
+      setMenu(false);
     });
   });
 
