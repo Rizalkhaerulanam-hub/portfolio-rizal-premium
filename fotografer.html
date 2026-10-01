@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Proyek Fotografer — koleksi fotografi Rizal Khaerul Anam dengan akses berbasis izin." />
+    <title>Fotografer — Rizal Khaerul Anam</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .photo-access{max-width:1050px;margin:0 auto;padding:110px 20px 80px}
+      .access-hero{display:grid;grid-template-columns:1.25fr .75fr;gap:28px;align-items:stretch}
+      .access-card,.panel{border:1px solid var(--line,rgba(255,255,255,.12));background:var(--surface,rgba(255,255,255,.04));border-radius:24px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.12)}
+      .access-card h1{font-size:clamp(2.4rem,6vw,5rem);line-height:.95;margin:12px 0 18px}
+      .eyebrow{font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;opacity:.7}
+      .muted{opacity:.7}
+      .role-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}
+      .role-option{border:1px solid var(--line,rgba(255,255,255,.12));border-radius:18px;padding:18px;cursor:pointer;transition:.2s}
+      .role-option:hover{transform:translateY(-2px);border-color:currentColor}
+      .role-option input{position:absolute;opacity:0;pointer-events:none}
+      .role-option:has(input:checked){outline:2px solid currentColor;background:rgba(127,127,127,.08)}
+      .role-icon{font-size:1.6rem;display:block;margin-bottom:8px}
+      .form-stack{display:grid;gap:12px}
+      .form-stack label{display:grid;gap:7px;font-size:.9rem}
+      .form-stack input,.form-stack select{width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--line,rgba(255,255,255,.12));background:transparent;color:inherit}
+      .action-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+      .status{padding:13px 15px;border-radius:12px;margin-top:14px;display:none}
+      .status.show{display:block}
+      .status.ok{background:rgba(60,180,110,.12)}
+      .status.err{background:rgba(220,70,70,.12)}
+      .status.wait{background:rgba(220,170,50,.12)}
+      .account-panel{display:none}
+      .account-panel.show{display:block}
+      .gallery{margin-top:28px}
+      .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+      .gallery-item{min-height:220px;border-radius:18px;overflow:hidden;border:1px solid var(--line,rgba(255,255,255,.12));background:rgba(127,127,127,.08)}
+      .gallery-item img{width:100%;height:100%;min-height:220px;object-fit:cover;display:block}
+      .locked{display:grid;place-items:center;text-align:center;min-height:220px;padding:30px}
+      .topbar{position:fixed;top:0;left:0;right:0;z-index:20;padding:14px 20px;background:rgba(10,10,10,.5);backdrop-filter:blur(16px);border-bottom:1px solid var(--line,rgba(255,255,255,.1))}
+      .topbar-inner{max-width:1050px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
+      @media(max-width:800px){.access-hero{grid-template-columns:1fr}.role-grid,.gallery-grid{grid-template-columns:1fr}.photo-access{padding-top:90px}}
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-inner">
+        <a href="index.html" class="brand-mark" aria-label="Kembali ke portfolio">RK</a>
+        <a href="index.html#projects" class="btn btn-secondary">← Kembali ke Proyek</a>
+      </div>
+    </div>
+
+    <main class="photo-access">
+      <section class="access-hero">
+        <div class="access-card">
+          <span class="eyebrow">Project 06 · Photography</span>
+          <h1>Fotografer</h1>
+          <p class="muted">
+            Koleksi hasil potretan Rizal Khaerul Anam. Sebagian koleksi membutuhkan
+            persetujuan akses sebelum dapat dilihat.
+          </p>
+
+          <div id="loggedOut">
+            <div class="panel">
+              <span class="eyebrow">Buat akun / masuk</span>
+              <h2>Akses koleksi</h2>
+              <p class="muted">Akun menyimpan izin Anda. Setelah disetujui, Anda tidak dapat mengganti kategori sendiri.</p>
+              <form id="authForm" class="form-stack">
+                <label>Email <input id="email" type="email" autocomplete="email" required placeholder="nama@email.com"></label>
+                <label>Password <input id="password" type="password" autocomplete="current-password" minlength="6" required placeholder="Minimal 6 karakter"></label>
+                <div class="action-row">
+                  <button class="btn btn-primary" type="submit" data-mode="login">Masuk</button>
+                  <button class="btn btn-secondary" type="button" id="registerBtn">Daftar</button>
+                </div>
+              </form>
+              <div id="authStatus" class="status"></div>
+            </div>
+
+            <div class="panel" style="margin-top:14px">
+              <span class="eyebrow">Belum punya izin?</span>
+              <h2>Ajukan akses</h2>
+              <p class="muted">Pilihan ini hanya berlaku sebagai permintaan. Kategori final ditetapkan oleh admin.</p>
+              <form id="requestForm" class="form-stack">
+                <label>Nama lengkap <input id="requestName" required placeholder="Nama Anda"></label>
+                <div class="role-grid">
+                  <label class="role-option"><input type="radio" name="role" value="FEMALE" required><span class="role-icon">👩</span><strong>Perempuan</strong><small class="muted">Koleksi yang ditandai FEMALE + UMUM</small></label>
+                  <label class="role-option"><input type="radio" name="role" value="MALE"><span class="role-icon">👨</span><strong>Laki-laki</strong><small class="muted">Koleksi yang ditandai MALE + UMUM</small></label>
+                  <label class="role-option"><input type="radio" name="role" value="PUBLIC"><span class="role-icon">🌐</span><strong>Umum</strong><small class="muted">Hanya koleksi UMUM</small></label>
+                </div>
+                <button class="btn btn-primary" type="submit">Kirim Permintaan ↗</button>
+              </form>
+              <div id="requestStatus" class="status"></div>
+            </div>
+          </div>
+
+          <div id="accountPanel" class="account-panel">
+            <div class="panel">
+              <span class="eyebrow">Akun Anda</span>
+              <h2 id="welcomeName">Pengunjung</h2>
+              <p id="accountRole" class="muted"></p>
+              <div class="action-row">
+                <button id="refreshBtn" class="btn btn-secondary">Perbarui Status</button>
+                <button id="logoutBtn" class="btn btn-secondary">Keluar</button>
+              </div>
+              <div id="accountStatus" class="status"></div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="panel">
+          <span class="eyebrow">Sistem izin</span>
+          <h2>Bagaimana akses bekerja?</h2>
+          <ol class="muted">
+            <li>Buat akun dan masuk.</li>
+            <li>Ajukan salah satu dari 3 kategori akses.</li>
+            <li>Admin meninjau dan menerima/menolak.</li>
+            <li>Jika diterima, role tersimpan di akun.</li>
+            <li>Saat login lagi, akses otomatis mengikuti role tersebut.</li>
+          </ol>
+          <p class="muted">Pengunjung tidak dapat mengganti role yang sudah disetujui. Hanya admin yang dapat mengubah atau mencabut akses.</p>
+        </aside>
+      </section>
+
+      <section class="gallery panel" id="gallery">
+        <span class="eyebrow">Private gallery</span>
+        <h2>Koleksi yang dapat Anda lihat</h2>
+        <div id="galleryGrid" class="gallery-grid">
+          <div class="locked"><div><strong>🔒 Galeri terkunci</strong><p class="muted">Masuk dan tunggu persetujuan akses.</p></div></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/photographer.js"></script>
+  </body>
+</html>
