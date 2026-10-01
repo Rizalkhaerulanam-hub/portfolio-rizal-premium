@@ -1,10 +1,8 @@
 <!doctype html>
 <html lang="id" data-theme="dark">
   <head>
-    <link rel="icon" type="image/png" href="assets/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <link rel="apple-touch-icon" href="assets/favicon.svg" />
-    <title>Rizal Khaerul Anam</title>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
@@ -12,12 +10,6 @@
       content="Portofolio Rizal Khaerul Anam — Mahasiswa Informatika, Web Developer, dan Tech Enthusiast."
     />
     <title>Rizal Khaerul Anam — Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
     <script>
       (() => {
         const saved = localStorage.getItem("rizal-theme");
@@ -31,9 +23,11 @@
         }
       })();
     </script>
+    <link rel="preload" as="image" href="assets/profile-760.webp" fetchpriority="high" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Lewati ke konten utama</a>
     <div class="cursor-glow" aria-hidden="true"></div>
     <div class="noise" aria-hidden="true"></div>
 
@@ -48,13 +42,14 @@
           class="menu-toggle"
           id="menuToggle"
           type="button"
+          aria-controls="navMenu"
           aria-label="Buka menu"
           aria-expanded="false"
         >
           <span></span><span></span><span></span>
         </button>
 
-        <nav class="nav-menu" id="navMenu">
+        <nav class="nav-menu" id="navMenu" aria-label="Navigasi utama">
           <a href="#home" class="nav-link active">Beranda</a>
           <a href="#about" class="nav-link">Tentang</a>
           <a href="#projects" class="nav-link">Proyek</a>
@@ -72,12 +67,12 @@
           type="button"
           aria-label="Ganti tema"
         >
-          <span class="theme-icon">☼</span>
+          <span class="theme-icon" aria-hidden="true">☼</span>
         </button>
       </div>
     </header>
 
-    <main>
+    <main id="main-content">
       <section class="hero section" id="home">
         <div class="hero-orb orb-one"></div>
         <div class="hero-orb orb-two"></div>
@@ -142,8 +137,14 @@
               </div>
               <div class="profile-photo">
                 <img
-                  src="assets/profile.webp"
+                  src="assets/profile-760.webp"
+                  srcset="assets/profile-480.webp 480w, assets/profile-760.webp 760w"
+                  sizes="(max-width: 600px) 75vw, 380px"
                   alt="Foto profil Rizal Khaerul Anam"
+                  width="760"
+                  height="950"
+                  decoding="async"
+                  fetchpriority="high"
                 />
               </div>
               <div class="profile-bottom">
@@ -215,7 +216,7 @@
             <article class="project-card featured reveal">
               <div class="project-image">
                 <img
-                  src="assets/Project/01.webp"
+                  src="assets/Project/01-768.webp" srcset="assets/Project/01-480.webp 480w, assets/Project/01-768.webp 768w, assets/Project/01-1078.webp 1078w" sizes="(max-width: 600px) 91vw, (max-width: 900px) 88vw, 680px" width="1078" height="552" loading="lazy" decoding="async"
                   alt="Preview WEBSITE IMM BUYA HAMKA"
                 />
                 <!-- PERUBAHAN: Tag <div> diganti <a>, ditambah href dan target="_blank" -->
@@ -248,7 +249,7 @@
             <article class="project-card reveal reveal-delay">
               <div class="project-image">
                 <img
-                  src="assets/Project/02.webp"
+                  src="assets/Project/02-768.webp" srcset="assets/Project/02-480.webp 480w, assets/Project/02-768.webp 768w, assets/Project/02-936.webp 936w" sizes="(max-width: 600px) 91vw, (max-width: 900px) 44vw, 540px" width="936" height="533" loading="lazy" decoding="async"
                   alt="Preview Website Portofolio"
                 />
                 <!-- PERUBAHAN: Tag <div> diganti <a> -->
@@ -280,7 +281,7 @@
             <article class="project-card reveal">
               <div class="project-image">
                 <img
-                  src="assets/Project/03.webp"
+                  src="assets/Project/03-768.webp" srcset="assets/Project/03-480.webp 480w, assets/Project/03-768.webp 768w, assets/Project/03-982.webp 982w" sizes="(max-width: 600px) 91vw, (max-width: 900px) 44vw, 540px" width="982" height="507" loading="lazy" decoding="async"
                   alt="Game Quiz Berbasis Scratch"
                 />
                 <!-- PERUBAHAN: Tag <div> diganti <a> -->
@@ -312,7 +313,7 @@
             <!--  projects 04 -->
             <article class="project-card reveal reveal-delay">
               <div class="project-image">
-                <img src="assets/Project/04.webp" alt="Preview desain canva" />
+                <img src="assets/Project/04-660.webp" srcset="assets/Project/04-480.webp 480w, assets/Project/04-660.webp 660w" sizes="(max-width: 600px) 91vw, (max-width: 900px) 44vw, 540px" width="660" height="371" loading="lazy" decoding="async" alt="Preview desain canva" />
                 <!-- PERUBAHAN: Tag <div> diganti <a> -->
                 <!-- Ganti bagian link di Proyek 04 menjadi ini -->
                 <a
@@ -342,7 +343,7 @@
             <!--  projects 05 -->
             <article class="project-card reveal">
               <div class="project-image">
-                <img src="assets/Project/05.webp" alt="Preview video editing" />
+                <img src="assets/Project/05-768.webp" srcset="assets/Project/05-480.webp 480w, assets/Project/05-768.webp 768w, assets/Project/05-943.webp 943w" sizes="(max-width: 600px) 91vw, (max-width: 900px) 44vw, 540px" width="943" height="530" loading="lazy" decoding="async" alt="Preview video editing" />
                 <!-- PERUBAHAN: Tag <div> diganti <a> -->
 
                 <a
@@ -372,12 +373,12 @@
             <article class="project-card reveal reveal-delay">
               <div class="project-image">
                 <img
-                  src="assets/Project/comingsoon.jpg"
+                  src="assets/Project/comingsoon-768.webp" srcset="assets/Project/comingsoon-480.webp 480w, assets/Project/comingsoon-768.webp 768w, assets/Project/comingsoon-1024.webp 1024w" sizes="(max-width: 600px) 91vw, (max-width: 900px) 44vw, 540px" width="1024" height="667" loading="lazy" decoding="async"
                   alt="Preview fotografi"
                 />
                 <!-- PERUBAHAN: Tag <div> diganti <a> -->
                 <a
-                  href="fotografer.html"
+                  href="#contact"
                   target="_self"
                   class="project-overlay"
                 >
@@ -405,12 +406,12 @@
             <article class="project-card reveal">
               <div class="project-image">
                 <img
-                  src="assets/Project/comingsoon.jpg"
+                  src="assets/Project/comingsoon-768.webp" srcset="assets/Project/comingsoon-480.webp 480w, assets/Project/comingsoon-768.webp 768w, assets/Project/comingsoon-1024.webp 1024w" sizes="(max-width: 600px) 91vw, (max-width: 900px) 44vw, 540px" width="1024" height="667" loading="lazy" decoding="async"
                   alt="Preview videografi"
                 />
                 <!-- PERUBAHAN: Tag <div> diganti <a> -->
                 <a
-                  href="videografer.html"
+                  href="#contact"
                   target="_self"
                   class="project-overlay"
                 >
@@ -511,7 +512,7 @@
 
             <div class="certs reveal reveal-delay">
               <div class="subheading">
-                <span>SERTIFIKAT</span><a href="#">Lihat semua ↗</a>
+                <span>SERTIFIKAT</span><a href="#contact">Lihat semua ↗</a>
               </div>
               <div class="cert-card">
                 <b>IMM</b>
@@ -542,23 +543,21 @@
             >
           </div>
 
-          <form class="contact-form reveal reveal-delay" id="contactForm">
-            <label
-              >Nama<input
+          <form class="contact-form reveal reveal-delay" id="contactForm" aria-labelledby="contact-form-title">
+            <h3 id="contact-form-title" class="sr-only">Formulir kontak</h3>
+            <label for="contact-name">Nama<input id="contact-name" autocomplete="name"
                 type="text"
                 name="name"
                 placeholder="Nama Anda"
                 required
             /></label>
-            <label
-              >Email<input
+            <label for="contact-email">Email<input id="contact-email" autocomplete="email"
                 type="email"
                 name="email"
                 placeholder="email@domain.com"
                 required
             /></label>
-            <label
-              >Pesan<textarea
+            <label for="contact-message">Pesan<textarea id="contact-message"
                 name="message"
                 placeholder="Ceritakan kebutuhan atau ide Anda..."
                 required
@@ -598,6 +597,6 @@
       </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
   </body>
 </html>
