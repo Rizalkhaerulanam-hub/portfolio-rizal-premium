@@ -1,684 +1,126 @@
-<!doctype html>
-<html lang="id" data-theme="dark">
-  <head>
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
-    <link rel="apple-touch-icon" href="assets/favicon.svg" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Portofolio Rizal Khaerul Anam — Mahasiswa Informatika, Web Developer, dan Tech Enthusiast."
-    />
-    <title>Rizal Khaerul Anam — Portfolio</title>
-    <script>
-      (() => {
-        const saved = localStorage.getItem("rizal-theme");
-        if (saved === "light" || saved === "dark") {
-          document.documentElement.dataset.theme = saved;
-        } else if (
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: light)").matches
-        ) {
-          document.documentElement.dataset.theme = "light";
-        }
-      })();
-    </script>
-    <link
-      rel="preload"
-      as="image"
-      href="https://res.cloudinary.com/u39ubtph/image/upload/f_auto,q_auto/20260912_123428"
-      fetchpriority="high"
-    />
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <a class="skip-link" href="#main-content">Lewati ke konten utama</a>
-    <div class="cursor-glow" aria-hidden="true"></div>
-    <div class="noise" aria-hidden="true"></div>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Portofolio Rizal Khaerul Anam, mahasiswa Informatika, web developer, dan kreator visual.">
+  <meta name="theme-color" content="#F6F7F9">
+  <title>Rizal Khaerul Anam | Portfolio</title>
 
-    <header class="site-header">
-      <div class="container nav">
-        <a class="brand" href="#home" aria-label="Rizal Khaerul Anam">
-          <span class="brand-mark">RK</span>
-          <span class="brand-name">Rizal Khaerul Anam</span>
-        </a>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Lewati ke konten utama</a>
 
-        <button
-          class="menu-toggle"
-          id="menuToggle"
-          type="button"
-          aria-controls="navMenu"
-          aria-label="Buka menu"
-          aria-expanded="false"
-        >
-          <span></span><span></span><span></span>
-        </button>
+<header>
+  <div class="wrap">
+    <a class="logo" href="#home"><span class="mark">RK</span>Rizal Khaerul Anam</a>
+    <nav aria-label="Navigasi utama">
+      <a href="#about">Tentang</a><a href="#projects">Proyek</a><a href="#skills">Keahlian</a><a href="#journey">Perjalanan</a><a href="#contact">Kontak</a>
+    </nav>
+    <div class="actions">
+      <a class="cv" href="https://rizalkhaerulanam.my.id/assets/Rizal-Khaerul-Anam-CV.pdf">Download CV</a>
+      <button class="tbtn" id="theme" type="button" aria-label="Ganti tema" aria-pressed="false">☼</button>
+    </div>
+  </div>
+</header>
 
-        <nav class="nav-menu" id="navMenu" aria-label="Navigasi utama">
-          <a href="#home" class="nav-link active">Beranda</a>
-          <a href="#about" class="nav-link">Tentang</a>
-          <a href="#projects" class="nav-link">Proyek</a>
-          <a href="#skills" class="nav-link">Keahlian</a>
-          <a href="#journey" class="nav-link">Perjalanan</a>
-          <a href="#contact" class="nav-link">Kontak</a>
-          <a class="nav-cv" href="assets/Rizal-Khaerul-Anam-CV.pdf" download
-            >Download CV</a
-          >
-        </nav>
-
-        <button
-          class="theme-toggle"
-          id="themeToggle"
-          type="button"
-          aria-label="Ganti tema"
-        >
-          <span class="theme-icon" aria-hidden="true">☼</span>
-        </button>
+<main id="main">
+  <div class="hero" id="home"><div class="wrap">
+    <div>
+      <p class="hi">HALO, SAYA RIZAL</p>
+      <h1>Building digital experiences that <em>matter.</em></h1>
+      <p class="roles">Mahasiswa Informatika · Web Developer · Desain Grafis · Video Editing · Fotografer · Videografer</p>
+      <p class="lead">Saya membangun website, desain grafis, video editing, dan solusi digital yang cepat, modern, responsif, dan berorientasi pada pengalaman pengguna, untuk bisnis, organisasi, maupun proyek pribadi.</p>
+      <div class="btns"><a class="btn primary" href="#projects">Lihat Proyek ↗</a><a class="btn ghost" href="#contact">Mari Terhubung</a></div>
+      <div class="social" aria-label="Media sosial">
+        <a href="https://github.com/Rizalkhaerulanam-hub" aria-label="GitHub" target="_blank" rel="noopener noreferrer">GH</a>
+        <a href="https://www.linkedin.com/in/rizal-khaerul-anam-7a9240411" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">in</a>
+        <a href="https://www.instagram.com/_khaeruull" aria-label="Instagram" target="_blank" rel="noopener noreferrer">ig</a>
+        <a href="mailto:rizal.khaerul.anam@gmail.com" aria-label="Email">@</a>
       </div>
-    </header>
+    </div>
+    <div class="photo" role="img" aria-label="Ilustrasi profil Rizal Khaerul Anam">RK
+      <span class="chip c3"><span class="dot"></span>Available for work</span>
+      <span class="chip c1">&lt;/&gt; Clean Code</span>
+      <span class="chip c2">✦ UI / UX</span>
+      <div class="cap">Rizal Khaerul Anam<small>Mahasiswa Informatika</small></div>
+    </div>
+  </div></div>
 
-    <main id="main-content">
-      <section class="hero section" id="home">
-        <div class="hero-orb orb-one"></div>
-        <div class="hero-orb orb-two"></div>
-        <div class="container hero-grid">
-          <div class="hero-copy reveal">
-            <p class="eyebrow"><span></span> HALO, SAYA RIZAL</p>
-            <h1>Building digital experiences that <em>matter.</em></h1>
-            <p class="hero-role">
-              Mahasiswa Informatika <b>·</b> Web Developer <b>·</b> Desain
-              grafis <b>·</b> Video Editing <b>·</b> Fotografer
-              <b>·</b> Videografer
-            </p>
-            <p class="hero-text">
-              Saya membangun website, Desain grafis, video editing dan solusi
-              digital yang cepat, modern, responsif, dan berorientasi pada
-              pengalaman pengguna, saya dapat membantu Anda mewujudkan ide
-              menjadi produk digital yang bermanfaat dan berdampak, baik untuk
-              bisnis, organisasi, maupun proyek pribadi.
-            </p>
+  <section id="about"><div class="wrap about">
+    <div>
+      <p class="eyebrow">TENTANG SAYA</p>
+      <h2>Lebih dari sekadar <em>kode.</em></h2>
+      <p>Saya Rizal Khaerul Anam, mahasiswa S1 Informatika dengan ketertarikan pada pengembangan web, teknologi modern, desain grafis, video editing, fotografi, dan videografi.</p>
+      <p>Bagi saya, teknologi adalah alat untuk menciptakan sesuatu yang berguna. Saya senang mempelajari hal baru, bekerja secara kolaboratif, dan mengubah ide menjadi produk digital yang mudah digunakan.</p>
+      <div class="traits"><div class="trait"><b>01</b>Problem Solver</div><div class="trait"><b>02</b>Continuous Learner</div><div class="trait"><b>03</b>Team Player</div></div>
+    </div>
+    <blockquote><p>Teknologi bukan hanya tentang kode, tapi tentang bagaimana kita membuat hidup orang lain menjadi lebih mudah.</p><cite>Rizal Khaerul Anam</cite></blockquote>
+  </div></section>
 
-            <div class="hero-actions">
-              <a href="#projects" class="btn btn-primary"
-                >Lihat Proyek <span>↗</span></a
-              >
-              <a href="#contact" class="btn btn-ghost">Mari Terhubung</a>
-            </div>
+  <section id="projects"><div class="wrap">
+    <p class="eyebrow">SELECTED WORK</p>
+    <h2>Proyek yang pernah <em>saya bangun.</em></h2>
+    <p class="sub">Eksplorasi proyek, teknologi, dan pendekatan yang saya gunakan.</p>
+    <div class="grid">
+      <article class="card"><div class="thumb"><span>01 · WEBSITE</span>IMM</div><div class="body"><h3>Website IMM Buya Hamka</h3><p>Website untuk memperkenalkan IMM Buya Hamka, organisasi dakwah yang berfokus pada pendidikan dan pengembangan karakter.</p><ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul><a class="go" href="https://rizalkhaerulanam-hub.github.io/website-imm/" target="_blank" rel="noopener noreferrer">View project ↗</a></div></article>
+      <article class="card"><div class="thumb"><span>02 · PERSONAL BRAND</span>RK</div><div class="body"><h3>Website Portofolio</h3><p>Website personal untuk membangun identitas profesional dan menampilkan karya secara terstruktur.</p><ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul><a class="go" href="https://github.com/Rizalkhaerulanam-hub/portfolio-rizal-premium" target="_blank" rel="noopener noreferrer">View project ↗</a></div></article>
+      <article class="card"><div class="thumb"><span>03 · GAME</span>ع</div><div class="body"><h3>Game Quiz Berbasis Scratch</h3><p>Game quiz interaktif dengan materi bahasa Arab dasar, dikembangkan menggunakan Scratch.</p><ul class="tags"><li>Kode Blok</li><li>Desain Grafis</li><li>Scratch</li></ul><a class="go" href="https://scratch.mit.edu/projects/1331678652/" target="_blank" rel="noopener noreferrer">View project ↗</a></div></article>
+      <article class="card"><div class="thumb"><span>04 · DESAIN</span>CV</div><div class="body"><h3>Desain Canva</h3><p>Desain berbagai kebutuhan visual, termasuk poster, infografis, dan desain sosial media.</p><ul class="tags"><li>Canva</li><li>Desain Grafis</li></ul><a class="go" href="desain-canva.html">View project ↗</a></div></article>
+      <article class="card"><div class="thumb"><span>05 · VIDEO EDITING</span>VE</div><div class="body"><h3>Video Editing</h3><p>Editing video untuk promosi, tutorial, dan konten sosial media.</p><ul class="tags"><li>CapCut</li><li>Video Editing</li></ul><a class="go" href="video-editing.html">View project ↗</a></div></article>
+      <article class="card"><div class="thumb"><span>06 · FOTOGRAFER</span>PH</div><div class="body"><h3>Fotografer</h3><p>Foto editing untuk retouching, manipulasi, dan optimasi gambar.</p><ul class="tags"><li>Photoshop</li><li>Fotografi</li></ul><a class="go" href="fotografer.html">View project ↗</a></div></article>
+    </div>
+  </div></section>
 
-            <div class="social-row">
-              <a
-                href="https://github.com/Rizalkhaerulanam-hub"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                >GH</a
-              >
-              <a
-                href="https://www.linkedin.com/in/rizal-khaerul-anam-7a9240411?utm_source=share_via&utm_content=profile&utm_medium=member_android"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                >in</a
-              >
-              <a
-                href="https://www.instagram.com/_khaeruull?stkn=MWhtMHY5NnFraHV6bA=="
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                >ig</a
-              >
-              <a href="mailto:rizal.khaerulanam@gmail.com" aria-label="Email"
-                >@</a
-              >
-            </div>
-          </div>
+  <section id="skills"><div class="wrap">
+    <p class="eyebrow">TECH STACK</p>
+    <h2>Tools untuk <em>mewujudkan ide.</em></h2>
+    <p class="sub">Teknologi yang saya gunakan untuk membangun interface, aplikasi web, hingga konten visual.</p>
+    <div class="marquee" aria-hidden="true"><div class="track"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Canva</span><span>CapCut</span><span>Desain Grafis</span><span>Fotografi</span><span>Videografi</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Canva</span><span>CapCut</span><span>Desain Grafis</span><span>Fotografi</span><span>Videografi</span></div></div>
+    <div class="bars">
+      <div class="bar"><div class="row"><span>HTML / CSS<small>Structure & Visual Design</small></span><b>65%</b></div><div class="meter"><i style="width:65%"></i></div></div>
+      <div class="bar"><div class="row"><span>JavaScript<small>Interactive Web Experience</small></span><b>75%</b></div><div class="meter"><i style="width:75%"></i></div></div>
+      <div class="bar"><div class="row"><span>Desain Grafis<small>Modern Visual Design</small></span><b>84%</b></div><div class="meter"><i style="width:84%"></i></div></div>
+      <div class="bar"><div class="row"><span>Video Editing<small>Video Animation</small></span><b>70%</b></div><div class="meter"><i style="width:70%"></i></div></div>
+      <div class="bar"><div class="row"><span>Fotografi<small>Photography & Image Editing</small></span><b>86%</b></div><div class="meter"><i style="width:86%"></i></div></div>
+      <div class="bar"><div class="row"><span>Videografi<small>Videography</small></span><b>80%</b></div><div class="meter"><i style="width:80%"></i></div></div>
+    </div>
+  </div></section>
 
-          <div class="hero-visual reveal reveal-delay">
-            <div class="visual-ring ring-a"></div>
-            <div class="visual-ring ring-b"></div>
-            <div class="profile-card">
-              <div class="profile-top">
-                <span>AVAILABLE FOR WORK</span><i></i>
-              </div>
-              <div class="profile-photo">
-                <img
-                  src="https://res.cloudinary.com/u39ubtph/image/upload/f_auto,q_auto/20260912_123428"
-                  alt="Foto profil Rizal Khaerul Anam"
-                  width="760"
-                  height="950"
-                  decoding="async"
-                  fetchpriority="high"
-                />
-              </div>
-              <div class="profile-bottom">
-                <strong>Rizal Khaerul Anam</strong>
-                <span>Mahasiswa Informatika</span>
-              </div>
-            </div>
-            <div class="floating-chip chip-code">
-              <span>&lt;/&gt;</span> Clean Code
-            </div>
-            <div class="floating-chip chip-ui"><span>✦</span> UI / UX</div>
-          </div>
-        </div>
-        <div class="scroll-cue">SCROLL <span></span></div>
-      </section>
+  <section id="journey"><div class="wrap">
+    <p class="eyebrow">MY JOURNEY</p>
+    <h2>Belajar, bertumbuh, <em>berkarya.</em></h2>
+    <div class="jr" style="margin-top:40px">
+      <div class="tl"><small>2025 sampai sekarang</small><h3>S1 Informatika</h3><p>Universitas Islam Negeri K.H. Abdurrahman Wahid</p></div>
+      <div class="cert"><h4>SERTIFIKAT</h4><strong>Masta (Masa Ta'aruf)</strong><span>IMM Buya Hamka · 2025</span></div>
+    </div>
+  </div></section>
 
-      <section class="section about" id="about">
-        <div class="container">
-          <div class="section-heading reveal">
-            <p class="eyebrow"><span></span> TENTANG SAYA</p>
-            <h2>Lebih dari sekadar <em>kode.</em></h2>
-          </div>
-          <div class="about-grid">
-            <div class="about-copy reveal">
-              <p class="lead">
-                Saya Rizal Khaerul Anam, Mahasiswa Program Studi S1 Informatika
-                dengan ketertarikan pada pengembangan web, teknologi modern,
-                Desain grafis, Video Editing, Fotografer, Videografer.
-              </p>
-              <p>
-                Bagi saya, teknologi adalah alat untuk menciptakan sesuatu yang
-                berguna. Saya senang mempelajari hal baru, bekerja secara
-                kolaboratif, dan mengubah ide menjadi produk digital yang mudah
-                digunakan.
-              </p>
-              <div class="mini-stats">
-                <div><strong>01</strong><span>Problem Solver</span></div>
-                <div><strong>02</strong><span>Continuous Learner</span></div>
-                <div><strong>03</strong><span>Team Player</span></div>
-              </div>
-            </div>
-            <div class="quote-card reveal reveal-delay">
-              <span class="quote-mark">“</span>
-              <p>
-                Teknologi bukan hanya tentang kode, tapi tentang bagaimana kita
-                membuat hidup orang lain menjadi lebih mudah.
-              </p>
-              <span>— Rizal Khaerul Anam</span>
-            </div>
-          </div>
-        </div>
-      </section>
+  <section id="contact"><div class="wrap contact">
+    <div>
+      <p class="eyebrow">LET'S CONNECT</p>
+      <h2>Punya ide? Mari buat sesuatu yang <em>berarti.</em></h2>
+      <p class="sub" style="margin-bottom:20px">Terbuka untuk peluang kerja, freelance, kolaborasi proyek, maupun diskusi seputar teknologi.</p>
+      <a class="mail" href="mailto:rizal.khaerul.anam25028@mhs.uingusdur.ac.id">rizal.khaerul.anam25028@mhs.uingusdur.ac.id</a><br>
+      <a class="wa" href="https://wa.me/6285865565047?text=Halo%20Rizal%2C%20saya%20ingin%20berdiskusi%20tentang%20proyek." target="_blank" rel="noopener noreferrer">Chat WhatsApp</a>
+    </div>
+    <form id="f">
+      <h3>Formulir kontak</h3>
+      <label>Nama<input name="n" required autocomplete="name"></label>
+      <label>Email<input name="e" type="email" required autocomplete="email"></label>
+      <label>Pesan<textarea name="m" rows="4" required></textarea></label>
+      <button type="submit">Kirim Pesan ↗</button>
+      <p class="note">Form ini akan membuka aplikasi email Anda.</p>
+    </form>
+  </div></section>
+</main>
 
-      <section class="section projects" id="projects">
-        <div class="container">
-          <div class="section-heading split reveal">
-            <div>
-              <p class="eyebrow"><span></span> SELECTED WORK</p>
-              <h2>Proyek yang <em>pernah saya bangun.</em></h2>
-            </div>
-            <p class="heading-note">
-              Eksplorasi proyek, teknologi, dan pendekatan yang saya gunakan.
-            </p>
-          </div>
+<footer><div class="wrap"><span><b>Rizal Khaerul Anam</b> · Mahasiswa Informatika</span><span>© 2026 Rizal Khaerul Anam · <a href="#home">Back to top ↑</a></span></div></footer>
 
-          <!--  projects  -->
-          <div class="project-grid">
-            <!--  projects 01 -->
-            <article class="project-card featured reveal">
-              <div class="project-image">
-                <img
-                  src="assets/Project/01-768.webp"
-                  srcset="
-                    assets/Project/01-480.webp   480w,
-                    assets/Project/01-768.webp   768w,
-                    assets/Project/01-1078.webp 1078w
-                  "
-                  sizes="(max-width: 600px) 91vw, (max-width: 900px) 88vw, 680px"
-                  width="1078"
-                  height="552"
-                  loading="lazy"
-                  decoding="async"
-                  alt="Preview WEBSITE IMM BUYA HAMKA"
-                />
-                <!-- PERUBAHAN: Tag <div> diganti <a>, ditambah href dan target="_blank" -->
-                <a
-                  href="https://rizalkhaerulanam-hub.github.io/website-imm/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="project-overlay"
-                  ><span>VIEW PROJECT ↗</span></a
-                >
-              </div>
-              <div class="project-info">
-                <div>
-                  <span class="project-index">01</span
-                  ><span class="project-type">WEBSITE</span>
-                </div>
-                <h3>Website IMM BUYA HAMKA</h3>
-                <p>
-                  Website untuk memperkenalkan tentang IMM Buya Hamka,
-                  organisasi dakwah yang berfokus pada pendidikan dan
-                  pengembangan karakter.
-                </p>
-                <div class="tags">
-                  <span>HTML</span><span>CSS</span><span>JavaScript</span>
-                </div>
-              </div>
-            </article>
-
-            <!--  projects 02 -->
-            <article class="project-card reveal reveal-delay">
-              <div class="project-image">
-                <img
-                  src="assets/Project/02-768.webp"
-                  srcset="
-                    assets/Project/02-480.webp 480w,
-                    assets/Project/02-768.webp 768w,
-                    assets/Project/02-936.webp 936w
-                  "
-                  sizes="(max-width: 600px) 91vw, (max-width: 900px) 44vw, 540px"
-                  width="936"
-                  height="533"
-                  loading="lazy"
-                  decoding="async"
-                  alt="Preview Website Portofolio"
-                />
-                <!-- PERUBAHAN: Tag <div> diganti <a> -->
-                <a
-                  href="https://github.com/Rizalkhaerulanam-hub/portfolio-rizal-premium"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="project-overlay"
-                  ><span>VIEW PROJECT ↗</span></a
-                >
-              </div>
-              <div class="project-info">
-                <div>
-                  <span class="project-index">02</span
-                  ><span class="project-type">PERSONAL BRAND</span>
-                </div>
-                <h3>Website Portofolio</h3>
-                <p>
-                  Website personal untuk membangun identitas profesional dan
-                  menampilkan karya secara terstruktur.
-                </p>
-                <div class="tags">
-                  <span>HTML</span><span>CSS</span><span>JavaScript</span>
-                </div>
-              </div>
-            </article>
-
-            <!--  projects 03 -->
-            <article class="project-card reveal">
-              <div class="project-image">
-                <img
-                  src="assets/Project/03-768.webp"
-                  srcset="
-                    assets/Project/03-480.webp 480w,
-                    assets/Project/03-768.webp 768w,
-                    assets/Project/03-982.webp 982w
-                  "
-                  sizes="(max-width: 600px) 91vw, (max-width: 900px) 44vw, 540px"
-                  width="982"
-                  height="507"
-                  loading="lazy"
-                  decoding="async"
-                  alt="Game Quiz Berbasis Scratch"
-                />
-                <!-- PERUBAHAN: Tag <div> diganti <a> -->
-                <a
-                  href="https://scratch.mit.edu/projects/1331678652/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="project-overlay"
-                  ><span>VIEW PROJECT ↗</span></a
-                >
-              </div>
-              <div class="project-info">
-                <div>
-                  <span class="project-index">03</span
-                  ><span class="project-type">GAME WEBSITE</span>
-                </div>
-                <h3>Game Quiz Berbasis Scratch</h3>
-                <p>
-                  Game quiz interaktif yang dikembangkan menggunakan Scratch,
-                  materi pelajaran bahasa arab dasar.
-                </p>
-                <div class="tags">
-                  <span>Kode Blok</span><span>Desain Grafis</span
-                  ><span>Scratch</span>
-                </div>
-              </div>
-            </article>
-
-            <!--  projects 04 -->
-            <article class="project-card reveal reveal-delay">
-              <div class="project-image">
-                <img
-                  src="assets/Project/04-660.webp"
-                  srcset="
-                    assets/Project/04-480.webp 480w,
-                    assets/Project/04-660.webp 660w
-                  "
-                  sizes="(max-width: 600px) 91vw, (max-width: 900px) 44vw, 540px"
-                  width="660"
-                  height="371"
-                  loading="lazy"
-                  decoding="async"
-                  alt="Preview desain canva"
-                />
-                <!-- PERUBAHAN: Tag <div> diganti <a> -->
-                <!-- Ganti bagian link di Proyek 04 menjadi ini -->
-                <a
-                  href="desain-canva.html"
-                  target="_self"
-                  class="project-overlay"
-                >
-                  <span>VIEW PROJECT ↗</span>
-                </a>
-              </div>
-              <div class="project-info">
-                <div>
-                  <span class="project-index">04</span
-                  ><span class="project-type">DESAIN</span>
-                </div>
-                <h3>Desain Canva</h3>
-                <p>
-                  Desain untuk berbagai kebutuhan visual menggunakan Canva,
-                  termasuk poster, infografis, dan desain sosial media.
-                </p>
-                <div class="tags">
-                  <span>Canva</span><span>Desain Grafis</span>
-                </div>
-              </div>
-            </article>
-
-            <!--  projects 05 -->
-            <article class="project-card reveal">
-              <div class="project-image">
-                <img
-                  src="assets/Project/05-768.webp"
-                  srcset="
-                    assets/Project/05-480.webp 480w,
-                    assets/Project/05-768.webp 768w,
-                    assets/Project/05-943.webp 943w
-                  "
-                  sizes="(max-width: 600px) 91vw, (max-width: 900px) 44vw, 540px"
-                  width="943"
-                  height="530"
-                  loading="lazy"
-                  decoding="async"
-                  alt="Preview video editing"
-                />
-                <!-- PERUBAHAN: Tag <div> diganti <a> -->
-
-                <a
-                  href="video-editing.html"
-                  target="_self"
-                  class="project-overlay"
-                >
-                  <span>VIEW PROJECT ↗</span>
-                </a>
-              </div>
-              <div class="project-info">
-                <div>
-                  <span class="project-index">05</span
-                  ><span class="project-type">Video Editing</span>
-                </div>
-                <h3>Video Editing</h3>
-                <p>
-                  Video editing untuk berbagai kebutuhan, termasuk promosi,
-                  tutorial, dan konten sosial media.
-                </p>
-                <div class="tags">
-                  <span>CapCut</span><span>Video Editing</span>
-                </div>
-              </div>
-            </article>
-            <!--  projects 06 -->
-            <article class="project-card reveal reveal-delay">
-              <div class="project-image">
-                <img
-                  src="assets/Project/comingsoon-768.webp"
-                  srcset="
-                    assets/Project/comingsoon-480.webp   480w,
-                    assets/Project/comingsoon-768.webp   768w,
-                    assets/Project/comingsoon-1024.webp 1024w
-                  "
-                  sizes="(max-width: 600px) 91vw, (max-width: 900px) 44vw, 540px"
-                  width="1024"
-                  height="667"
-                  loading="lazy"
-                  decoding="async"
-                  alt="Preview fotografi"
-                />
-                <!-- PERUBAHAN: Tag <div> diganti <a> -->
-                <a href="fotografer.html" class="project-overlay" aria-label="Buka proyek Fotografer">
-                  <span>VIEW PROJECT ↗</span>
-                </a>
-              </div>
-              <div class="project-info">
-                <div>
-                  <span class="project-index">06</span
-                  ><span class="project-type">Fotografer</span>
-                </div>
-                <h3>Fotografer</h3>
-                <p>
-                  Foto editing untuk berbagai kebutuhan, termasuk retouching,
-                  manipulasi, dan optimasi gambar.
-                </p>
-                <div class="tags">
-                  <span>Photoshop</span><span>Fotografer</span
-                  ><span>Fotografi</span>
-                </div>
-              </div>
-            </article>
-
-            <!--  projects 07 -->
-            <article class="project-card reveal">
-              <div class="project-image">
-                <img
-                  src="assets/Project/comingsoon-768.webp"
-                  srcset="
-                    assets/Project/comingsoon-480.webp   480w,
-                    assets/Project/comingsoon-768.webp   768w,
-                    assets/Project/comingsoon-1024.webp 1024w
-                  "
-                  sizes="(max-width: 600px) 91vw, (max-width: 900px) 44vw, 540px"
-                  width="1024"
-                  height="667"
-                  loading="lazy"
-                  decoding="async"
-                  alt="Preview videografi"
-                />
-                <!-- PERUBAHAN: Tag <div> diganti <a> -->
-                <a href="#contact" target="_self" class="project-overlay">
-                  <span>VIEW PROJECT ↗</span>
-                </a>
-              </div>
-              <div class="project-info">
-                <div>
-                  <span class="project-index">07</span
-                  ><span class="project-type">Videografer</span>
-                </div>
-                <h3>Videografer</h3>
-                <p>
-                  Videografi untuk berbagai kebutuhan, termasuk promosi,
-                  tutorial, dan konten sosial media.
-                </p>
-                <div class="tags">
-                  <span>Videografer</span>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section skills" id="skills">
-        <div class="container">
-          <div class="section-heading reveal">
-            <p class="eyebrow"><span></span> TECH STACK</p>
-            <h2>Tools untuk <em>mewujudkan ide.</em></h2>
-          </div>
-
-          <div class="skills-layout">
-            <div class="skill-intro reveal">
-              <p class="lead">
-                Teknologi yang saya gunakan untuk membangun interface, aplikasi
-                web, hingga backend.
-              </p>
-              <div class="stack-marquee">
-                <span>HTML</span><i>✦</i><span>CSS</span><i>✦</i
-                ><span>JAVASCRIPT</span><i>✦</i><span>Canva</span><i>✦</i
-                ><span>Capcut</span><span>✦</span><span> Videografer</span
-                ><i>✦</i><span>Desain Grafis</span><i>✦</i
-                ><span>Fotografer</span><i>✦</i>
-              </div>
-            </div>
-            <div class="skill-list reveal reveal-delay">
-              <div class="skill-item">
-                <span class="skill-number">01</span><strong>HTML / CSS</strong
-                ><small>Structure & Visual Design</small><b>65%</b>
-              </div>
-              <div class="skill-item">
-                <span class="skill-number">02</span><strong>JavaScript</strong
-                ><small>Interactive Web Experience</small><b>75%</b>
-              </div>
-              <div class="skill-item">
-                <span class="skill-number">03</span
-                ><strong>Desain Grafis</strong
-                ><small>Modern Visual Design</small><b>84%</b>
-              </div>
-              <div class="skill-item">
-                <span class="skill-number">04</span
-                ><strong>Video Editing</strong><small>Video Animation</small
-                ><b>70%</b>
-              </div>
-              <div class="skill-item">
-                <span class="skill-number">05</span><strong>Fotografer</strong
-                ><small>Photography & Image Editing</small><b>86%</b>
-              </div>
-              <div class="skill-item">
-                <span class="skill-number">06</span><strong>Videografer</strong
-                ><small>Videography</small><b>80%</b>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section journey" id="journey">
-        <div class="container">
-          <div class="section-heading reveal">
-            <p class="eyebrow"><span></span> MY JOURNEY</p>
-            <h2>Belajar, bertumbuh, <em>berkarya.</em></h2>
-          </div>
-
-          <div class="journey-grid">
-            <div class="timeline reveal">
-              <div class="timeline-item">
-                <span class="timeline-dot"></span>
-                <div>
-                  <small>2025 — sekarang</small>
-                  <h3>S1 Informatika</h3>
-                  <p>Universitas Islam Negeri K.H Abdurrahman Wahid</p>
-                </div>
-                <span class="timeline-badge">Sekarang</span>
-              </div>
-            </div>
-
-            <div class="certs reveal reveal-delay">
-              <div class="subheading">
-                <span>SERTIFIKAT</span><a href="#contact">Lihat semua ↗</a>
-              </div>
-              <div class="cert-card">
-                <b>IMM</b>
-                <div>
-                  <strong>Masta (masa ta'aruf)</strong
-                  ><small>IMM Buya Hamka · 2025</small>
-                </div>
-                <span>↗</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section contact" id="contact">
-        <div class="container contact-wrap">
-          <div class="contact-copy reveal">
-            <p class="eyebrow"><span></span> LET'S CONNECT</p>
-            <h2>Punya ide? Mari buat sesuatu yang <em>berarti.</em></h2>
-            <p>
-              Terbuka untuk peluang kerja, freelance, kolaborasi proyek, maupun
-              diskusi seputar teknologi.
-            </p>
-            <a
-              class="email-link"
-              href="mailto:rizal.khaerul.anam25028@mhs.uingusdur.ac.id"
-              >rizal.khaerul.anam25028@mhs.uingusdur.ac.id ↗</a
-            >
-          </div>
-
-          <form
-            class="contact-form reveal reveal-delay"
-            id="contactForm"
-            aria-labelledby="contact-form-title"
-          >
-            <h3 id="contact-form-title" class="sr-only">Formulir kontak</h3>
-            <label for="contact-name"
-              >Nama<input
-                id="contact-name"
-                autocomplete="name"
-                type="text"
-                name="name"
-                placeholder="Nama Anda"
-                required
-            /></label>
-            <label for="contact-email"
-              >Email<input
-                id="contact-email"
-                autocomplete="email"
-                type="email"
-                name="email"
-                placeholder="email@domain.com"
-                required
-            /></label>
-            <label for="contact-message"
-              >Pesan<textarea
-                id="contact-message"
-                name="message"
-                placeholder="Ceritakan kebutuhan atau ide Anda..."
-                required
-              ></textarea>
-            </label>
-            <button class="btn btn-primary" type="submit">
-              Kirim Pesan <span>↗</span>
-            </button>
-            <small class="form-note"
-              >Form ini akan membuka aplikasi email Anda.</small
-            >
-          </form>
-        </div>
-      </section>
-    </main>
-
-    <a
-      class="whatsapp"
-      href="https://wa.me/6285865565047?text=Halo%20Rizal%2C%20saya%20ingin%20berdiskusi%20tentang%20proyek."
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Hubungi Rizal melalui WhatsApp"
-    >
-      <span class="wa-icon">◔</span><span class="wa-text">Chat WhatsApp</span>
-    </a>
-
-    <footer>
-      <div class="container footer-inner">
-        <div>
-          <span class="brand-mark">RK</span><strong>Rizal Khaerul Anam</strong
-          ><small>Informatics Graduate · Build Better Solutions</small>
-        </div>
-        <div class="footer-links">
-          <a href="#home">Back to top ↑</a
-          ><span>© 2026 CV Rizal Khaerul Anam</span>
-        </div>
-      </div>
-    </footer>
-
-    <script src="js/main.js" defer></script>
-  </body>
+<script src="js/main.js" defer></script>
+</body>
 </html>
