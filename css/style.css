@@ -114,3 +114,58 @@ form button{font:inherit;font-weight:600;background:var(--accent);color:var(--on
 footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.85rem}
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 @media(prefers-reduced-motion:reduce){.track{animation:none}html{scroll-behavior:auto}}
+
+
+/* Detail pages: styles for navigation and components used by Canva/Video pages. */
+.photo > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.photo .cap{z-index:1}
+.thumb{overflow:hidden}
+.thumb>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.thumb>span{z-index:1;background:rgba(255,255,255,.88);padding:5px 8px;border-radius:6px}
+[data-theme="dark"] .thumb>span{background:rgba(10,18,32,.86)}
+.skip-link{position:absolute;left:-9999px;top:8px;z-index:1000;background:var(--surface);color:var(--ink);padding:10px 14px;border:2px solid var(--accent);border-radius:8px}
+.skip-link:focus{left:12px}
+.site-header{position:sticky;top:0;z-index:30;background:var(--bg);border-bottom:1px solid var(--line)}
+.container{width:min(1140px,100%);margin-inline:auto;padding-inline:24px}
+.site-header .nav{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600}
+.brand-mark{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:10px;background:var(--ink);color:var(--bg);font-family:var(--serif);font-weight:600}
+.brand-name{white-space:nowrap}
+.nav-menu{display:flex;align-items:center;gap:22px}
+.nav-link{color:var(--muted);font-size:.92rem}
+.nav-link:hover,.nav-link:focus-visible{color:var(--accent)}
+.theme-toggle,.menu-toggle{min-width:40px;min-height:40px;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--ink);cursor:pointer}
+.menu-toggle{display:none;border-radius:10px;padding:9px;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.menu-toggle span{display:block;width:18px;height:2px;background:currentColor}
+.section{padding:72px 0 96px;border-top:0}
+.page-hero{max-width:760px;margin:0 auto 38px}
+.back-link{display:inline-block;margin-bottom:26px;color:var(--accent);font-weight:600}
+.heading-note{color:var(--muted);max-width:65ch}
+.eyebrow span{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:8px}
+.project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.project-card{overflow:hidden;border:1px solid var(--line);border-radius:18px;background:var(--surface);transition:transform .2s,border-color .2s}
+.project-card:hover{transform:translateY(-3px);border-color:var(--accent)}
+.project-image img{display:block;width:100%;height:auto;aspect-ratio:1024/667;object-fit:cover}
+.project-info{padding:22px}
+.project-index,.project-type{font-size:.78rem;color:var(--accent);font-weight:600;margin-right:10px}
+.project-info h3{margin:12px 0 8px;font:500 1.35rem/1.25 var(--serif)}
+.project-info p{color:var(--muted)}
+.media-placeholder{aspect-ratio:16/9;display:grid;place-items:center;background:linear-gradient(135deg,var(--panel),var(--accent-soft));color:var(--accent);font-weight:700}
+.btn-primary,.btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;border-radius:999px;border:1px solid var(--accent);font-weight:600}
+.btn-primary{background:var(--accent);color:var(--on-accent)}
+.btn-secondary{background:transparent;color:var(--accent)}
+.page-footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted)}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.footer-inner>div:first-child{display:grid;grid-template-columns:auto 1fr;align-items:center;column-gap:10px}
+.footer-inner small{grid-column:2}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap;font-size:.85rem}
+@media(max-width:860px){
+  .site-header .nav{min-height:64px}
+  .menu-toggle{display:flex}
+  .nav-menu{display:none;position:absolute;top:calc(100% + 1px);left:0;right:0;padding:16px 24px 22px;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 12px 20px rgba(0,0,0,.08);flex-direction:column;align-items:stretch;gap:0}
+  .nav-menu.is-open{display:flex}
+  .nav-link{padding:12px 0;border-bottom:1px solid var(--line)}
+  .project-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){.container{padding-inline:18px}.brand-name{white-space:normal;font-size:.9rem}.section{padding:48px 0 64px}.project-info{padding:18px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}

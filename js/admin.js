@@ -24,12 +24,13 @@ async function load(){
       <div class="request-head"><strong>${escapeHtml(r.applicant_name||"Tanpa nama")}</strong><span>${roleLabel[r.requested_role]||r.requested_role}</span></div>
       <p class="muted">Diajukan: ${new Date(r.created_at).toLocaleString("id-ID")}</p>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn btn-primary" onclick="decide('${r.id}','${r.user_id}','${r.requested_role}','APPROVED')">✅ Terima</button>
-        <button class="btn btn-secondary" onclick="decide('${r.id}','${r.user_id}','${r.requested_role}','REJECTED')">❌ Tolak</button>
+        <button class="btn btn-primary" type="button" data-action="approve" data-request-id="${escapeHtml(r.id)}" data-user-id="${escapeHtml(r.user_id)}" data-role="${escapeHtml(r.requested_role)}">✅ Terima</button>
+        <button class="btn btn-secondary" type="button" data-action="reject" data-request-id="${escapeHtml(r.id)}" data-user-id="${escapeHtml(r.user_id)}" data-role="${escapeHtml(r.requested_role)}">❌ Tolak</button>
       </div>
     </article>`).join(""):'<p class="muted">Belum ada permintaan baru.</p>';
 }
 async function decide(requestId,userId,role,decision){
+  if (!["APPROVED", "REJECTED"].includes(decision) || !["FEMALE", "MALE", "PUBLIC"].includes(role)) return;
   const {error:e1}=await sb.from("access_requests").update({status:decision,reviewed_at:new Date().toISOString()}).eq("id",requestId).eq("status","PENDING");
   if(e1)return alert(e1.message);
   const payload=decision==="APPROVED"?{status:"APPROVED",access_role:role}:{status:"REJECTED",access_role:"NONE"};
@@ -45,6 +46,14 @@ $("adminLogin").addEventListener("submit",async e=>{
  const {error}=await sb.auth.signInWithPassword({email:$("adminEmail").value.trim(),password:$("adminPassword").value});
  if(error)return msg(error.message,"err"); await load();
 });
+$("requests").addEventListener("click", async (event) => {
+ const button = event.target.closest("button[data-action]");
+ if (!button) return;
+ const decision = button.dataset.action === "approve" ? "APPROVED" : "REJECTED";
+ button.disabled = true;
+ try { await decide(button.dataset.requestId, button.dataset.userId, button.dataset.role, decision); }
+ finally { if (button.isConnected) button.disabled = false; }
+});
 $("refresh").addEventListener("click",load);
-$("logout").addEventListener("click",async()=>{await sb.auth.signOut();location.reload();});
+$("logout").addEventListener("click",async()=>{if (sb) await sb.auth.signOut();location.reload();});
 if(configured())load();

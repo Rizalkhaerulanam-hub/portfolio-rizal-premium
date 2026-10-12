@@ -11,15 +11,11 @@
     <!-- Menghubungkan ke file CSS yang sama agar desainnya konsisten -->
     <script>
       (() => {
-        const saved = localStorage.getItem("rizal-theme");
-        if (saved === "light" || saved === "dark") {
-          document.documentElement.dataset.theme = saved;
-        } else if (
-          window.matchMedia &&
-          window.matchMedia("(prefers-color-scheme: light)").matches
-        ) {
-          document.documentElement.dataset.theme = "light";
-        }
+        try {
+          const saved = localStorage.getItem("theme");
+          if (saved === "light" || saved === "dark") document.documentElement.dataset.theme = saved;
+          else if (window.matchMedia?.("(prefers-color-scheme: light)").matches) document.documentElement.dataset.theme = "light";
+        } catch (_) {}
       })();
     </script>
     <link rel="stylesheet" href="css/style.css" />
@@ -80,7 +76,7 @@
             <article class="project-card featured">
               <div class="project-image">
                 <img
-                  src="assets/Project/comingsoon-768.webp" srcset="assets/Project/comingsoon-480.webp 480w, assets/Project/comingsoon-768.webp 768w, assets/Project/comingsoon-1024.webp 1024w" sizes="(max-width: 600px) 91vw, 540px" width="1024" height="667" loading="lazy" decoding="async"
+                  src="assets/Project/comingsoon-768.webp" srcset="assets/Project/comingsoon-480.webp 480w, assets/Project/comingsoon-768.webp 768w, assets/Project/comingsoon-1024.webp 1024w" sizes="(max-width: 600px) 91vw, 540px" width="1024" height="667" decoding="async"
                   alt="Desain proyek 01"
                   loading="lazy"
                 />
@@ -89,7 +85,7 @@
             <article class="project-card">
               <div class="project-image">
                 <img
-                  src="assets/Project/comingsoon-768.webp" srcset="assets/Project/comingsoon-480.webp 480w, assets/Project/comingsoon-768.webp 768w, assets/Project/comingsoon-1024.webp 1024w" sizes="(max-width: 600px) 91vw, 540px" width="1024" height="667" loading="lazy" decoding="async"
+                  src="assets/Project/comingsoon-768.webp" srcset="assets/Project/comingsoon-480.webp 480w, assets/Project/comingsoon-768.webp 768w, assets/Project/comingsoon-1024.webp 1024w" sizes="(max-width: 600px) 91vw, 540px" width="1024" height="667" decoding="async"
                   alt="Desain proyek 02"
                   loading="lazy"
                 />
@@ -98,7 +94,7 @@
             <article class="project-card">
               <div class="project-image">
                 <img
-                  src="assets/Project/comingsoon-768.webp" srcset="assets/Project/comingsoon-480.webp 480w, assets/Project/comingsoon-768.webp 768w, assets/Project/comingsoon-1024.webp 1024w" sizes="(max-width: 600px) 91vw, 540px" width="1024" height="667" loading="lazy" decoding="async"
+                  src="assets/Project/comingsoon-768.webp" srcset="assets/Project/comingsoon-480.webp 480w, assets/Project/comingsoon-768.webp 768w, assets/Project/comingsoon-1024.webp 1024w" sizes="(max-width: 600px) 91vw, 540px" width="1024" height="667" decoding="async"
                   alt="Desain proyek 03"
                   loading="lazy"
                 />
@@ -107,7 +103,7 @@
             <article class="project-card">
               <div class="project-image">
                 <img
-                  src="assets/Project/comingsoon-768.webp" srcset="assets/Project/comingsoon-480.webp 480w, assets/Project/comingsoon-768.webp 768w, assets/Project/comingsoon-1024.webp 1024w" sizes="(max-width: 600px) 91vw, 540px" width="1024" height="667" loading="lazy" decoding="async"
+                  src="assets/Project/comingsoon-768.webp" srcset="assets/Project/comingsoon-480.webp 480w, assets/Project/comingsoon-768.webp 768w, assets/Project/comingsoon-1024.webp 1024w" sizes="(max-width: 600px) 91vw, 540px" width="1024" height="667" decoding="async"
                   alt="Desain proyek 04"
                   loading="lazy"
                 />
@@ -116,7 +112,7 @@
             <article class="project-card">
               <div class="project-image">
                 <img
-                  src="assets/Project/comingsoon-768.webp" srcset="assets/Project/comingsoon-480.webp 480w, assets/Project/comingsoon-768.webp 768w, assets/Project/comingsoon-1024.webp 1024w" sizes="(max-width: 600px) 91vw, 540px" width="1024" height="667" loading="lazy" decoding="async"
+                  src="assets/Project/comingsoon-768.webp" srcset="assets/Project/comingsoon-480.webp 480w, assets/Project/comingsoon-768.webp 768w, assets/Project/comingsoon-1024.webp 1024w" sizes="(max-width: 600px) 91vw, 540px" width="1024" height="667" decoding="async"
                   alt="Desain proyek 05"
                   loading="lazy"
                 />
