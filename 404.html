@@ -3,7 +3,6 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>404 — RK Mini Game</title>
@@ -121,6 +120,7 @@
 
         background: rgba(255, 255, 255, 0.06);
 
+        -webkit-backdrop-filter: blur(15px);
         backdrop-filter: blur(15px);
 
         font-size: 19px;
@@ -149,6 +149,7 @@
 
         color: transparent;
 
+        -webkit-user-select: none;
         user-select: none;
       }
 
@@ -189,6 +190,7 @@
 
         border: 1px solid var(--border);
 
+        -webkit-backdrop-filter: blur(20px);
         backdrop-filter: blur(20px);
 
         box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
@@ -378,6 +380,7 @@
 
         background: rgba(5, 7, 14, 0.45);
 
+        -webkit-backdrop-filter: blur(2px);
         backdrop-filter: blur(2px);
 
         z-index: 10;
@@ -617,7 +620,7 @@
 
             <p id="messageText">Hindari semua rintangan!</p>
 
-            <button class="start-button" id="startButton">MULAI</button>
+            <button type="button" class="start-button" id="startButton">MULAI</button>
           </div>
         </div>
 
@@ -635,7 +638,7 @@
       <div class="buttons">
         <a href="index.html" class="btn home-btn"> ← Kembali ke Beranda </a>
 
-        <button class="btn restart-btn" id="restartButton">↻ Main Lagi</button>
+        <button type="button" class="btn restart-btn" id="restartButton">↻ Main Lagi</button>
       </div>
 
       <footer>© 2026 <span>RK — Rizal Khaerul Anam</span></footer>
@@ -896,4 +899,5 @@
     </script>
   </body>
 </html>
+
 ```
