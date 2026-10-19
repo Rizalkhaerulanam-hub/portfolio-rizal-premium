@@ -1250,3 +1250,69 @@ footer .wrap {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* =========================================================
+   ANIMASI BACKGROUND HERO (GLOWING BLOBS)
+   ========================================================= */
+.hero {
+  position: relative;
+  overflow: hidden; /* Mencegah scrollbar muncul karena elemen meluap */
+}
+
+.hero .wrap {
+  position: relative;
+  z-index: 2; /* Memastikan teks dan foto berada di atas animasi */
+}
+
+.hero-bg-anim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.22;
+  animation: floatBlob 14s infinite alternate ease-in-out;
+}
+
+/* Blob 1 - Akses Warna Emas/Accent */
+.blob-1 {
+  width: 380px;
+  height: 380px;
+  background: var(--accent);
+  top: -80px;
+  left: -60px;
+}
+
+/* Blob 2 - Akses Warna Ink/Navy */
+.blob-2 {
+  width: 320px;
+  height: 320px;
+  background: var(--ink);
+  bottom: -60px;
+  right: 10%;
+  animation-delay: -7s;
+}
+
+@keyframes floatBlob {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(70px, 50px) scale(1.1);
+  }
+  100% {
+    transform: translate(-50px, 90px) scale(0.95);
+  }
+}
+
+/* Mematikan animasi jika pengguna mengaktifkan mode hemat gerak */
+@media (prefers-reduced-motion: reduce) {
+  .blob {
+    animation: none;
+  }
+}
