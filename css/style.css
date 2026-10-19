@@ -236,7 +236,7 @@ h2 em {
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 .btn {
@@ -245,11 +245,15 @@ h2 em {
   justify-content: center;
   padding: 13px 24px;
   border-radius: 999px;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.92rem;
-  border: 1px solid var(--ink);
+  border: 1.5px solid var(--ink);
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
 }
 
 .btn:hover {
@@ -259,6 +263,7 @@ h2 em {
 .btn.primary {
   background: var(--ink);
   color: var(--bg);
+  border-color: var(--ink);
 }
 
 .btn.primary:hover {
@@ -267,31 +272,103 @@ h2 em {
   color: var(--on-accent);
 }
 
-.btn.ghost:hover {
-  background: var(--panel);
+/* Kontras Ditingkatkan untuk CTA Sekunder */
+.btn.btn-secondary,
+.btn.ghost {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1.5px solid var(--line);
 }
 
+.btn.btn-secondary:hover,
+.btn.ghost:hover {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+/* Kontras & Touch Target Ditingkatkan untuk Media Sosial */
 .social {
   display: flex;
   gap: 10px;
+  margin-bottom: 32px;
 }
 
-.social a {
-  width: 40px;
-  height: 40px;
+.social a,
+.social .social-icon {
+  width: 42px;
+  height: 42px;
   border: 1px solid var(--line);
   border-radius: 50%;
   display: grid;
   place-items: center;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  color: var(--muted);
+  color: var(--ink);
   background: var(--surface);
+  transition: all 0.2s ease;
 }
 
-.social a:hover {
-  color: var(--accent);
+.social a:hover,
+.social .social-icon:hover {
+  color: var(--on-accent);
+  background: var(--accent);
   border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* Bukti Sosial Above the Fold */
+.social-proof-above-fold {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  width: fit-content;
+}
+
+.proof-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.proof-number {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.proof-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.proof-divider {
+  width: 1px;
+  height: 28px;
+  background-color: var(--line);
+}
+
+@media (max-width: 520px) {
+  .social-proof-above-fold {
+    gap: 12px;
+    padding: 12px 16px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .proof-number {
+    font-size: 1.15rem;
+  }
+
+  .proof-label {
+    font-size: 0.72rem;
+  }
 }
 
 .photo {
@@ -451,8 +528,9 @@ h2 {
 blockquote {
   margin: 0;
   padding: 32px;
-  background: var(--ink);
-  color: #eaeff7;
+  background: var(--panel);
+  color: var(--ink);
+  border: 1px solid var(--line);
   border-radius: 20px;
   align-self: start;
 }
@@ -460,6 +538,7 @@ blockquote {
 blockquote p {
   font: italic 400 1.3rem/1.5 var(--serif);
   margin: 0 0 18px;
+  color: var(--ink);
 }
 
 blockquote cite {
@@ -493,7 +572,9 @@ blockquote cite {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: border-color 0.2s, transform 0.2s;
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
 }
 
 .card:hover {
@@ -1000,7 +1081,9 @@ footer .wrap {
   border: 1px solid var(--line);
   border-radius: 18px;
   background: var(--surface);
-  transition: transform 0.2s, border-color 0.2s;
+  transition:
+    transform 0.2s,
+    border-color 0.2s;
 }
 
 .project-card:hover {
@@ -1167,4 +1250,3 @@ footer .wrap {
     transition-duration: 0.01ms !important;
   }
 }
-
