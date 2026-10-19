@@ -8,7 +8,6 @@
       name="description"
       content="Halaman 404 interaktif dengan mini game RK."
     />
-
     <title>404 — RK Mini Game</title>
 
     <style>
@@ -619,7 +618,9 @@
 
             <p id="messageText">Hindari semua rintangan!</p>
 
-            <button type="button" class="start-button" id="startButton">MULAI</button>
+            <button type="button" class="start-button" id="startButton">
+              MULAI
+            </button>
           </div>
         </div>
 
@@ -637,7 +638,9 @@
       <div class="buttons">
         <a href="index.html" class="btn home-btn"> ← Kembali ke Beranda </a>
 
-        <button type="button" class="btn restart-btn" id="restartButton">↻ Main Lagi</button>
+        <button type="button" class="btn restart-btn" id="restartButton">
+          ↻ Main Lagi
+        </button>
       </div>
 
       <footer>© 2026 <span>RK — Rizal Khaerul Anam</span></footer>
@@ -684,7 +687,23 @@
 
       let scoreTimer;
 
-      let bestScore = Number(localStorage.getItem("rk404Best")) || 0;
+      function getBestScore() {
+        try {
+          return Number(localStorage.getItem("rk404Best")) || 0;
+        } catch (error) {
+          return 0;
+        }
+      }
+
+      function saveBestScore(value) {
+        try {
+          localStorage.setItem("rk404Best", value);
+        } catch (error) {
+          // Ignore storage errors in restricted browser modes.
+        }
+      }
+
+      let bestScore = getBestScore();
 
       bestElement.textContent = bestScore;
 

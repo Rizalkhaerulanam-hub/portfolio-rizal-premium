@@ -5,15 +5,20 @@
     <link rel="apple-touch-icon" href="assets/favicon.svg" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Kumpulan karya video editing dan konten visual oleh Rizal Khaerul Anam." />
+    <meta
+      name="description"
+      content="Kumpulan karya video editing dan konten visual oleh Rizal Khaerul Anam."
+    />
     <title>Video Editing — Rizal Khaerul Anam</title>
     <!-- Menghubungkan ke file CSS yang sama -->
     <script>
       (() => {
         try {
           const saved = localStorage.getItem("theme");
-          if (saved === "light" || saved === "dark") document.documentElement.dataset.theme = saved;
-          else if (window.matchMedia?.("(prefers-color-scheme: light)").matches) document.documentElement.dataset.theme = "light";
+          if (saved === "light" || saved === "dark")
+            document.documentElement.dataset.theme = saved;
+          else if (window.matchMedia?.("(prefers-color-scheme: light)").matches)
+            document.documentElement.dataset.theme = "light";
         } catch (_) {}
       })();
     </script>
@@ -69,21 +74,47 @@
             </p>
           </div>
 
-          <!-- Tempat Anda menaruh video nantinya -->
           <div class="project-grid media-grid">
             <article class="project-card video-card featured">
-              <div class="media-placeholder"><span>VIDEO</span></div>
+              <div class="media-placeholder">
+                <span>VIDEO</span>
+              </div>
               <div class="project-info">
                 <div>
-                  <span class="project-index">01</span
-                  ><span class="project-type">VIDEO EDITING</span>
+                  <span class="project-index">01</span>
+                  <span class="project-type">VIDEO EDITING</span>
                 </div>
-                <h3>Project Video</h3>
+                <h3>Promotional Reel</h3>
                 <p>
-                  Tambahkan thumbnail atau video hasil editing Anda di area ini.
+                  Video pendek yang dirancang untuk membangun visual branding,
+                  memperkuat pesan, dan menarik perhatian audiens secara cepat.
                 </p>
-                <a href="mailto:rizal.khaerulanam25028@mhs.uingusdur.ac.id?subject=Permintaan%20Video%20Editing" class="btn btn-primary"
+                <a
+                  href="mailto:rizal.khaerulanam25028@mhs.uingusdur.ac.id?subject=Permintaan%20Video%20Editing"
+                  class="btn btn-primary"
                   >Tonton Video <span>↗</span></a
+                >
+              </div>
+            </article>
+
+            <article class="project-card video-card">
+              <div class="media-placeholder">
+                <span>REEL</span>
+              </div>
+              <div class="project-info">
+                <div>
+                  <span class="project-index">02</span>
+                  <span class="project-type">EDITING</span>
+                </div>
+                <h3>Highlight Event</h3>
+                <p>
+                  Editing video event dengan pacing yang dinamis, transisi yang
+                  halus, dan penyusunan narasi yang lebih berkesan.
+                </p>
+                <a
+                  href="mailto:rizal.khaerulanam25028@mhs.uingusdur.ac.id?subject=Permintaan%20Edit%20Video%20Event"
+                  class="btn btn-primary"
+                  >Lihat Detail <span>↗</span></a
                 >
               </div>
             </article>

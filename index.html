@@ -20,8 +20,42 @@
     />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .journey-row {
+        margin-top: 40px;
+      }
+
+      .contact-copy {
+        margin-bottom: 20px;
+      }
+
+      .skill-level-65 {
+        width: 65%;
+      }
+
+      .skill-level-75 {
+        width: 75%;
+      }
+
+      .skill-level-84 {
+        width: 84%;
+      }
+
+      .skill-level-70 {
+        width: 70%;
+      }
+
+      .skill-level-86 {
+        width: 86%;
+      }
+
+      .skill-level-80 {
+        width: 80%;
+      }
+    </style>
   </head>
   <body>
+    <div class="cursor-glow" aria-hidden="true"></div>
     <a class="skip" href="#main">Lewati ke konten utama</a>
 
     <header>
@@ -56,7 +90,7 @@
     </header>
 
     <main id="main">
-      <div class="hero" id="home">
+      <div class="hero reveal" id="home">
         <!-- Element Animasi Background Opsi 1 (Glowing Blobs) -->
         <div class="hero-bg-anim" aria-hidden="true">
           <div class="blob blob-1"></div>
@@ -145,7 +179,7 @@
               alt="Foto profil Rizal Khaerul Anam"
               width="640"
               height="800"
-              fetchpriority="high"
+              loading="eager"
               decoding="async"
             />
             <span class="chip c3"
@@ -160,7 +194,7 @@
         </div>
       </div>
 
-      <section id="about">
+      <section id="about" class="reveal">
         <div class="wrap about">
           <div>
             <p class="eyebrow">TENTANG SAYA</p>
@@ -192,7 +226,7 @@
         </div>
       </section>
 
-      <section id="projects">
+      <section id="projects" class="reveal">
         <div class="wrap">
           <p class="eyebrow">SELECTED WORK</p>
           <h2>Proyek yang pernah <em>saya bangun.</em></h2>
@@ -404,7 +438,7 @@
         </div>
       </section>
 
-      <section id="skills">
+      <section id="skills" class="reveal">
         <div class="wrap">
           <p class="eyebrow">TECH STACK</p>
           <h2>Tools untuk <em>mewujudkan ide.</em></h2>
@@ -428,52 +462,52 @@
                 <span>HTML / CSS<small>Structure & Visual Design</small></span
                 ><b>65%</b>
               </div>
-              <div class="meter"><i style="width: 65%"></i></div>
+              <div class="meter"><i class="skill-level-65"></i></div>
             </div>
             <div class="bar">
               <div class="row">
                 <span>JavaScript<small>Interactive Web Experience</small></span
                 ><b>75%</b>
               </div>
-              <div class="meter"><i style="width: 75%"></i></div>
+              <div class="meter"><i class="skill-level-75"></i></div>
             </div>
             <div class="bar">
               <div class="row">
                 <span>Desain Grafis<small>Modern Visual Design</small></span
                 ><b>84%</b>
               </div>
-              <div class="meter"><i style="width: 84%"></i></div>
+              <div class="meter"><i class="skill-level-84"></i></div>
             </div>
             <div class="bar">
               <div class="row">
                 <span>Video Editing<small>Video Animation</small></span
                 ><b>70%</b>
               </div>
-              <div class="meter"><i style="width: 70%"></i></div>
+              <div class="meter"><i class="skill-level-70"></i></div>
             </div>
             <div class="bar">
               <div class="row">
                 <span>Fotografi<small>Photography & Image Editing</small></span
                 ><b>86%</b>
               </div>
-              <div class="meter"><i style="width: 86%"></i></div>
+              <div class="meter"><i class="skill-level-86"></i></div>
             </div>
             <div class="bar">
               <div class="row">
                 <span>Videografi<small>Videography</small></span
                 ><b>80%</b>
               </div>
-              <div class="meter"><i style="width: 80%"></i></div>
+              <div class="meter"><i class="skill-level-80"></i></div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="journey">
+      <section id="journey" class="reveal">
         <div class="wrap">
           <p class="eyebrow">MY JOURNEY</p>
           <h2>Belajar, bertumbuh, <em>berkarya.</em></h2>
-          <div class="jr" style="margin-top: 40px">
+          <div class="jr journey-row">
             <div class="tl">
               <small>2025 sampai sekarang</small>
               <h3>S1 Informatika</h3>
@@ -481,19 +515,27 @@
             </div>
             <div class="cert">
               <h4>SERTIFIKAT</h4>
-              <strong>Masta (Masa Ta'aruf)</strong
-              ><span>IMM Buya Hamka · 2025</span>
+              <strong>Masta (Masa Ta'aruf)</strong>
+              <span>IMM Buya Hamka · 2025</span>
+              <button
+                class="btn primary cert-btn"
+                type="button"
+                data-cert-modal
+                aria-label="Lihat sertifikat Masta"
+              >
+                Lihat Sertifikat ↗
+              </button>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="contact">
+      <section id="contact" class="reveal">
         <div class="wrap contact">
           <div>
             <p class="eyebrow">LET'S CONNECT</p>
             <h2>Punya ide? Mari buat sesuatu yang <em>berarti.</em></h2>
-            <p class="sub" style="margin-bottom: 20px">
+            <p class="sub contact-copy">
               Terbuka untuk peluang kerja, freelance, kolaborasi proyek, maupun
               diskusi seputar teknologi.
             </p>
@@ -532,6 +574,36 @@
         >
       </div>
     </footer>
+
+    <div class="cert-modal-backdrop" id="certModal" aria-hidden="true">
+      <div
+        class="cert-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="certTitle"
+      >
+        <button
+          type="button"
+          class="cert-modal-close"
+          data-close-cert
+          aria-label="Kembali ke menu sebelumnya"
+        >
+          ×
+        </button>
+        <h3 id="certTitle">Sertifikat Masta (Masa Ta'aruf)</h3>
+        <img
+          src="assets/SERTIFIKAT/S_01.png"
+          alt="Sertifikat Masta (Masa Ta'aruf)"
+        />
+        <button
+          type="button"
+          class="btn ghost cert-modal-return"
+          data-close-cert
+        >
+          Kembali
+        </button>
+      </div>
+    </div>
 
     <script src="js/main.js" defer></script>
   </body>
