@@ -180,6 +180,47 @@ $("authForm").addEventListener("submit", async (e) => {
   await refreshAccount();
 });
 
+function renderPasswordToggle(button, isVisible) {
+  const eyeSvg = `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path>
+      <circle cx="12" cy="12" r="3"></circle>
+    </svg>
+  `;
+  const eyeOffSvg = `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M3 3l18 18"></path>
+      <path d="M10.6 10.6A2 2 0 0 0 13.4 13.4"></path>
+      <path d="M9.1 5.5A11 11 0 0 1 12 5c6.5 0 10 7 10 7a16.8 16.8 0 0 1-4.3 5.2"></path>
+      <path d="M6.2 6.2A16.7 16.7 0 0 0 2 12s3.5 7 10 7a11.3 11.3 0 0 0 5.5-1.5"></path>
+    </svg>
+  `;
+
+  button.innerHTML = isVisible ? eyeOffSvg : eyeSvg;
+  button.setAttribute(
+    "aria-label",
+    isVisible ? "Sembunyikan password" : "Tampilkan password",
+  );
+  button.title = isVisible ? "Sembunyikan password" : "Tampilkan password";
+}
+
+document.querySelectorAll(".password-toggle").forEach((button) => {
+  button.type = "button";
+
+  const input = document.getElementById(button.dataset.target);
+  const isVisible = input?.type === "text";
+  renderPasswordToggle(button, isVisible);
+
+  button.addEventListener("click", () => {
+    const targetInput = document.getElementById(button.dataset.target);
+    if (!targetInput) return;
+
+    const nextVisible = targetInput.type === "password";
+    targetInput.type = nextVisible ? "text" : "password";
+    renderPasswordToggle(button, nextVisible);
+  });
+});
+
 $("registerBtn").addEventListener("click", async () => {
   if (!configured())
     return status($("authStatus"), "Supabase belum dikonfigurasi.", "err");
