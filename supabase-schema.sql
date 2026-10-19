@@ -20,6 +20,7 @@ create table if not exists public.access_requests (
   user_id uuid not null references public.profiles(id) on delete cascade,
   applicant_name text not null,
   requested_role public.access_role not null,
+  wa_number text not null,
   status public.request_status not null default 'PENDING',
   created_at timestamptz not null default now(),
   reviewed_at timestamptz
@@ -68,19 +69,20 @@ for select to authenticated using (user_id = auth.uid() or public.is_admin());
 create policy "admins review requests" on public.access_requests
 for update to authenticated using (public.is_admin()) with check (public.is_admin());
 
--- Photos: only approved users may read metadata matching their role.
+-- Photos: approved users may read their own folder plus public items.
 create policy "approved users read allowed photos" on public.photos
 for select to authenticated
 using (
   is_published = true
-  and (
-    access_role = 'PUBLIC'
-    or exists(
-      select 1 from public.profiles p
-      where p.id = auth.uid()
-        and p.status = 'APPROVED'
-        and p.access_role = public.photos.access_role
-    )
+  and exists(
+    select 1 from public.profiles p
+    where p.id = auth.uid()
+      and p.status = 'APPROVED'
+      and (
+        (p.access_role = 'PUBLIC' and public.photos.access_role in ('PUBLIC', 'MALE', 'FEMALE'))
+        or (p.access_role = 'MALE' and public.photos.access_role in ('PUBLIC', 'MALE'))
+        or (p.access_role = 'FEMALE' and public.photos.access_role in ('PUBLIC', 'FEMALE'))
+      )
   )
 );
 

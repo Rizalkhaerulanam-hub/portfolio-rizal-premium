@@ -8,6 +8,14 @@ const roleLabel = {
   PUBLIC: "🌐 Umum",
 };
 
+function openWhatsAppMessage(phoneNumber, message) {
+  const cleaned = String(phoneNumber || "").replace(/\D/g, "");
+  if (!cleaned) return;
+
+  const finalUrl = `https://wa.me/${cleaned}?text=${encodeURIComponent(message)}`;
+  window.open(finalUrl, "_blank", "noopener,noreferrer");
+}
+
 function configured() {
   return (
     sb &&
@@ -39,7 +47,9 @@ async function load() {
   $("dashboard").style.display = "";
   const { data, error } = await sb
     .from("access_requests")
-    .select("id,user_id,applicant_name,requested_role,status,created_at")
+    .select(
+      "id,user_id,applicant_name,requested_role,wa_number,status,created_at",
+    )
     .eq("status", "PENDING")
     .order("created_at", { ascending: false });
   if (error) {
@@ -54,6 +64,7 @@ async function load() {
     <article class="request">
       <div class="request-head"><strong>${escapeHtml(r.applicant_name || "Tanpa nama")}</strong><span>${roleLabel[r.requested_role] || r.requested_role}</span></div>
       <p class="muted">Diajukan: ${new Date(r.created_at).toLocaleString("id-ID")}</p>
+      <p class="muted">WhatsApp: ${escapeHtml(r.wa_number || "-")}</p>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button class="btn btn-primary" type="button" data-action="approve" data-request-id="${escapeHtml(r.id)}" data-user-id="${escapeHtml(r.user_id)}" data-role="${escapeHtml(r.requested_role)}">✅ Terima</button>
         <button class="btn btn-secondary" type="button" data-action="reject" data-request-id="${escapeHtml(r.id)}" data-user-id="${escapeHtml(r.user_id)}" data-role="${escapeHtml(r.requested_role)}">❌ Tolak</button>
@@ -69,6 +80,14 @@ async function decide(requestId, userId, role, decision) {
     !["FEMALE", "MALE", "PUBLIC"].includes(role)
   )
     return;
+
+  const { data: requestData, error: requestError } = await sb
+    .from("access_requests")
+    .select("wa_number")
+    .eq("id", requestId)
+    .maybeSingle();
+  if (requestError) return alert(requestError.message);
+
   const { error: e1 } = await sb
     .from("access_requests")
     .update({ status: decision, reviewed_at: new Date().toISOString() })
@@ -84,6 +103,19 @@ async function decide(requestId, userId, role, decision) {
     .update(payload)
     .eq("id", userId);
   if (e2) return alert(e2.message);
+
+  if (decision === "APPROVED") {
+    openWhatsAppMessage(
+      requestData?.wa_number,
+      "Akun Anda sudah diberikan izin.",
+    );
+  } else {
+    openWhatsAppMessage(
+      requestData?.wa_number,
+      "Permintaan izin Anda ditolak. Silakan hubungi admin di Instagram @_khaeruull.",
+    );
+  }
+
   await load();
 }
 function escapeHtml(v = "") {

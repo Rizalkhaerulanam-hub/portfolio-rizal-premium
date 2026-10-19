@@ -8,6 +8,15 @@ const SUPABASE_ANON_KEY = "sb_publishable_ITJL59-5AGNuhNPHBO59og_GOzCPBI6";
 const sb = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const $ = (id) => document.getElementById(id);
 
+function openWhatsAppMessage(phoneNumber, message) {
+  const cleaned = String(phoneNumber || "").replace(/\D/g, "");
+  if (!cleaned) return;
+
+  const baseUrl = `https://wa.me/${cleaned}`;
+  const finalUrl = `${baseUrl}?text=${encodeURIComponent(message)}`;
+  window.open(finalUrl, "_blank", "noopener,noreferrer");
+}
+
 const ROLE_LABEL = {
   FEMALE: "👩 Perempuan",
   MALE: "👨 Laki-laki",
@@ -47,12 +56,26 @@ async function loadGallery(role) {
     return;
   }
 
-  // RLS database hanya mengembalikan metadata foto yang sesuai role.
+  const allowedRoles =
+    role === "PUBLIC"
+      ? ["PUBLIC", "MALE", "FEMALE"]
+      : role === "MALE"
+        ? ["MALE", "PUBLIC"]
+        : role === "FEMALE"
+          ? ["FEMALE", "PUBLIC"]
+          : [];
+
+  if (!allowedRoles.length) {
+    grid.innerHTML =
+      '<div class="locked"><div><strong>🔒 Galeri terkunci</strong><p class="muted">Akses belum disetujui admin.</p></div></div>';
+    return;
+  }
+
   const { data, error } = await sb
     .from("photos")
     .select("id,title,access_role,display_url")
     .eq("is_published", true)
-    .in("access_role", role === "PUBLIC" ? ["PUBLIC"] : [role, "PUBLIC"])
+    .in("access_role", allowedRoles)
     .order("created_at", { ascending: false });
 
   if (error) {
@@ -193,10 +216,11 @@ $("requestForm").addEventListener("submit", async (e) => {
 
   const role = new FormData(e.currentTarget).get("role");
   const name = $("requestName").value.trim();
-  if (!name || !role)
+  const waNumber = $("requestWa").value.trim();
+  if (!name || !role || !waNumber)
     return status(
       $("requestStatus"),
-      "Lengkapi nama dan kategori akses.",
+      "Lengkapi nama, nomor WhatsApp, dan kategori akses.",
       "err",
     );
 
@@ -212,18 +236,22 @@ $("requestForm").addEventListener("submit", async (e) => {
       "err",
     );
 
-  const { error } = await sb
-    .from("access_requests")
-    .insert({ user_id: user.id, requested_role: role, applicant_name: name });
+  const { error } = await sb.from("access_requests").insert({
+    user_id: user.id,
+    requested_role: role,
+    applicant_name: name,
+    wa_number: waNumber,
+  });
   if (error) return status($("requestStatus"), error.message, "err");
 
   await sb
     .from("profiles")
     .update({ full_name: name, status: "PENDING", access_role: "NONE" })
     .eq("id", user.id);
+
   status(
     $("requestStatus"),
-    "Permintaan terkirim. Tunggu verifikasi admin.",
+    "Permintaan terkirim. Admin akan memproses dan menghubungi Anda via WhatsApp.",
     "ok",
   );
   await refreshAccount();
