@@ -20,7 +20,7 @@ EXCEPTION
     WHEN duplicate_object THEN null;
 END $$;
 
--- 2. Buat tabel
+-- 2. Buat tabel profiles, requests, dan photos
 CREATE TABLE IF NOT EXISTS public.profiles (
   id uuid PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
   full_name text,
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS public.photos (
   title text NOT NULL,
   access_role public.access_role NOT NULL,
   display_url text NOT NULL,
-  is_published boolean NOT NULL DEFAULT false,
+  is_published boolean NOT NULL DEFAULT true,
   created_at timestamptz NOT NULL DEFAULT now()
 );
 
@@ -55,7 +55,7 @@ ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.access_requests ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.photos ENABLE ROW LEVEL SECURITY;
 
--- 4. Helper Function: cek apakah user adalah admin
+-- 4. Helper Function: cek status admin
 CREATE OR REPLACE FUNCTION public.is_admin()
 RETURNS boolean
 LANGUAGE sql
@@ -67,6 +67,7 @@ AS $$
 $$;
 
 -- 5. Kebijakan Keamanan (RLS Policies)
+-- 5a. Profiles
 DROP POLICY IF EXISTS "users read own profile" ON public.profiles;
 CREATE POLICY "users read own profile" ON public.profiles
 FOR SELECT TO authenticated USING (id = auth.uid() OR public.is_admin());
@@ -76,10 +77,11 @@ CREATE POLICY "users update own pending profile name only" ON public.profiles
 FOR UPDATE TO authenticated USING (id = auth.uid())
 WITH CHECK (id = auth.uid());
 
-DROP POLICY IF EXISTS "admins update profiles" ON public.profiles;
-CREATE POLICY "admins update profiles" ON public.profiles
-FOR UPDATE TO authenticated USING (public.is_admin()) WITH CHECK (public.is_admin());
+DROP POLICY IF EXISTS "admins manage profiles" ON public.profiles;
+CREATE POLICY "admins manage profiles" ON public.profiles
+FOR ALL TO authenticated USING (public.is_admin()) WITH CHECK (public.is_admin());
 
+-- 5b. Access Requests
 DROP POLICY IF EXISTS "users create own access request" ON public.access_requests;
 CREATE POLICY "users create own access request" ON public.access_requests
 FOR INSERT TO authenticated WITH CHECK (user_id = auth.uid());
@@ -88,24 +90,28 @@ DROP POLICY IF EXISTS "users read own requests" ON public.access_requests;
 CREATE POLICY "users read own requests" ON public.access_requests
 FOR SELECT TO authenticated USING (user_id = auth.uid() OR public.is_admin());
 
-DROP POLICY IF EXISTS "admins review requests" ON public.access_requests;
-CREATE POLICY "admins review requests" ON public.access_requests
-FOR UPDATE TO authenticated USING (public.is_admin()) WITH CHECK (public.is_admin());
+DROP POLICY IF EXISTS "admins manage requests" ON public.access_requests;
+CREATE POLICY "admins manage requests" ON public.access_requests
+FOR ALL TO authenticated USING (public.is_admin()) WITH CHECK (public.is_admin());
 
+-- 5c. Photos
 DROP POLICY IF EXISTS "approved users read allowed photos" ON public.photos;
 CREATE POLICY "approved users read allowed photos" ON public.photos
 FOR SELECT TO authenticated
 USING (
-  is_published = true
-  AND EXISTS(
-    SELECT 1 FROM public.profiles p
-    WHERE p.id = auth.uid()
-      AND p.status = 'APPROVED'
-      AND (
-        (p.access_role = 'PUBLIC' AND public.photos.access_role IN ('PUBLIC', 'MALE', 'FEMALE'))
-        OR (p.access_role = 'MALE' AND public.photos.access_role IN ('PUBLIC', 'MALE'))
-        OR (p.access_role = 'FEMALE' AND public.photos.access_role IN ('PUBLIC', 'FEMALE'))
-      )
+  public.is_admin()
+  OR (
+    is_published = true
+    AND EXISTS(
+      SELECT 1 FROM public.profiles p
+      WHERE p.id = auth.uid()
+        AND p.status = 'APPROVED'
+        AND (
+          (p.access_role = 'PUBLIC' AND public.photos.access_role IN ('PUBLIC', 'MALE', 'FEMALE'))
+          OR (p.access_role = 'MALE' AND public.photos.access_role IN ('PUBLIC', 'MALE'))
+          OR (p.access_role = 'FEMALE' AND public.photos.access_role IN ('PUBLIC', 'FEMALE'))
+        )
+    )
   )
 );
 
@@ -132,7 +138,7 @@ CREATE TRIGGER on_auth_user_created
 AFTER INSERT ON auth.users
 FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();
 
--- 7. Langsung set workingpribadi@gmail.com sebagai Admin
+-- 7. LANGSUNG SET workingpribadi@gmail.com SEBAGAI ADMIN
 INSERT INTO public.profiles (id, is_admin, status, access_role)
 SELECT id, true, 'APPROVED', 'PUBLIC'
 FROM auth.users

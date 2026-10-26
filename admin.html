@@ -2,160 +2,821 @@
 <html lang="id">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Admin Fotografer — Rizal Khaerul Anam</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Dashboard Admin Studio — Rizal Khaerul Anam</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <style>
+      :root {
+        --admin-bg: #0b1325;
+        --admin-card: rgba(17, 28, 48, 0.85);
+        --admin-border: rgba(148, 163, 184, 0.18);
+        --admin-accent: #d6ae62;
+      }
+
       body {
         min-height: 100vh;
+        background: radial-gradient(circle at 10% 10%, rgba(214, 174, 98, 0.08), transparent 30%),
+                    radial-gradient(circle at 90% 90%, rgba(15, 27, 51, 0.5), transparent 40%),
+                    var(--bg);
+        color: var(--ink);
+        font-family: var(--sans);
       }
+
       .admin-wrap {
-        max-width: 1100px;
-        margin: auto;
-        padding: 90px 20px 60px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 24px 80px;
       }
-      .admin-grid {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 18px;
-      }
-      .panel {
-        border: 1px solid var(--line, rgba(255, 255, 255, 0.12));
-        background: var(--surface, rgba(255, 255, 255, 0.04));
-        border-radius: 20px;
-        padding: 24px;
-      }
-      .stack {
-        display: grid;
-        gap: 12px;
-      }
-      .stack input {
-        padding: 13px;
-        border-radius: 12px;
-        border: 1px solid var(--line, rgba(255, 255, 255, 0.12));
-        background: transparent;
-        color: inherit;
-      }
-      .request {
-        border: 1px solid var(--line, rgba(255, 255, 255, 0.12));
-        border-radius: 16px;
-        padding: 18px;
-        margin-bottom: 12px;
-      }
-      .request-head {
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
-      .muted {
-        opacity: 0.7;
-      }
-      .status {
-        padding: 12px;
-        border-radius: 12px;
-        margin-top: 12px;
-      }
-      .ok {
-        background: rgba(60, 180, 110, 0.12);
-      }
-      .err {
-        background: rgba(220, 70, 70, 0.12);
-      }
-      .wait {
-        background: rgba(220, 170, 50, 0.12);
-      }
-      .admin-header {
-        margin: 25px 0;
-      }
-      .login-panel {
-        max-width: 520px;
-      }
-      .dashboard-header {
+
+      /* Navbar Admin */
+      .admin-topbar {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-bottom: 32px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .admin-brand {
+        display: flex;
+        align-items: center;
         gap: 12px;
       }
-      .hidden {
-        display: none !important;
+
+      .admin-brand .brand-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: var(--ink);
+        color: var(--bg);
+        display: grid;
+        place-items: center;
+        font: 700 1.1rem var(--serif);
+        border: 1px solid var(--accent);
       }
-      @media (max-width: 800px) {
-        .admin-grid {
+
+      .admin-brand h1 {
+        font-size: 1.35rem;
+        margin: 0;
+        font-family: var(--serif);
+        line-height: 1.2;
+      }
+
+      .admin-brand small {
+        display: block;
+        color: var(--muted);
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+
+      .topbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      /* Panels */
+      .panel {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 26px;
+        box-shadow: 0 16px 36px rgba(15, 27, 51, 0.06);
+        position: relative;
+      }
+
+      /* Login Panel */
+      .login-container {
+        max-width: 460px;
+        margin: 50px auto;
+      }
+
+      .login-header {
+        text-align: center;
+        margin-bottom: 24px;
+      }
+
+      .login-header h2 {
+        font: 600 1.8rem var(--serif);
+        margin: 0 0 8px;
+      }
+
+      .login-tip {
+        font-size: 0.88rem;
+        color: var(--muted);
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px 14px;
+        margin-top: 18px;
+      }
+
+      /* Metrics Grid */
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+
+      .metric-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        transition: transform 0.25s ease, border-color 0.25s ease;
+      }
+
+      .metric-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--accent);
+      }
+
+      .metric-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        font-size: 1.4rem;
+        background: var(--panel);
+        color: var(--accent);
+      }
+
+      .metric-info h3 {
+        margin: 0;
+        font-size: 1.6rem;
+        font-weight: 800;
+        line-height: 1;
+        color: var(--accent);
+      }
+
+      .metric-info p {
+        margin: 4px 0 0;
+        font-size: 0.8rem;
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      /* Tabs */
+      .admin-tabs {
+        display: flex;
+        gap: 8px;
+        border-bottom: 2px solid var(--line);
+        margin-bottom: 24px;
+        overflow-x: auto;
+        padding-bottom: 2px;
+      }
+
+      .tab-btn {
+        padding: 12px 20px;
+        border: 0;
+        background: transparent;
+        color: var(--muted);
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        border-radius: 10px 10px 0 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.2s ease;
+        position: relative;
+        white-space: nowrap;
+      }
+
+      .tab-btn:hover {
+        color: var(--ink);
+        background: var(--panel);
+      }
+
+      .tab-btn.active {
+        color: var(--accent);
+        background: var(--surface);
+      }
+
+      .tab-btn.active::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 2.5px;
+        background: var(--accent);
+        border-radius: 2px;
+      }
+
+      .tab-badge {
+        font-size: 0.72rem;
+        padding: 2px 7px;
+        border-radius: 999px;
+        background: var(--accent);
+        color: var(--on-accent);
+        font-weight: 700;
+      }
+
+      .tab-pane {
+        display: none;
+      }
+
+      .tab-pane.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* Section Toolbar */
+      .toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+      }
+
+      .filter-group {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .filter-chip {
+        padding: 6px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        color: var(--muted);
+        font-size: 0.82rem;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.2s ease;
+      }
+
+      .filter-chip.active,
+      .filter-chip:hover {
+        background: var(--accent);
+        color: var(--on-accent);
+        border-color: var(--accent);
+      }
+
+      .search-box {
+        position: relative;
+        min-width: 260px;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 9px 14px 9px 36px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        color: var(--ink);
+        font-size: 0.88rem;
+      }
+
+      .search-box span {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      /* Requests Cards */
+      .request-item {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 20px;
+        margin-bottom: 14px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 18px;
+        flex-wrap: wrap;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+      }
+
+      .request-item:hover {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+      }
+
+      .request-details {
+        display: grid;
+        gap: 6px;
+      }
+
+      .request-details strong {
+        font-size: 1.15rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .request-meta {
+        display: flex;
+        gap: 16px;
+        font-size: 0.85rem;
+        color: var(--muted);
+        flex-wrap: wrap;
+      }
+
+      .request-meta a {
+        color: #25d366;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .request-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .role-select {
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        color: var(--ink);
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      /* Badges */
+      .badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 0.74rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+      }
+
+      .badge-pending { background: rgba(220, 170, 50, 0.18); color: #e5b964; border: 1px solid rgba(220, 170, 50, 0.3); }
+      .badge-approved { background: rgba(34, 197, 94, 0.18); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.3); }
+      .badge-rejected { background: rgba(239, 68, 68, 0.18); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); }
+      .badge-role { background: rgba(168, 122, 47, 0.18); color: var(--accent); border: 1px solid rgba(168, 122, 47, 0.3); }
+
+      /* Table Styles for Users */
+      .table-responsive {
+        overflow-x: auto;
+      }
+
+      .admin-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+      }
+
+      .admin-table th {
+        text-align: left;
+        padding: 12px 16px;
+        border-bottom: 2px solid var(--line);
+        color: var(--muted);
+        font-weight: 600;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .admin-table td {
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: middle;
+      }
+
+      .admin-table tr:hover td {
+        background: color-mix(in srgb, var(--panel) 50%, transparent);
+      }
+
+      /* Photo Grid */
+      .photos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 18px;
+        margin-top: 20px;
+      }
+
+      .photo-admin-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.2s ease, border-color 0.2s ease;
+      }
+
+      .photo-admin-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--accent);
+      }
+
+      .photo-thumb-wrap {
+        aspect-ratio: 16 / 10;
+        background: #000;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .photo-thumb-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .photo-card-body {
+        padding: 14px;
+        display: grid;
+        gap: 8px;
+        flex: 1;
+      }
+
+      .photo-card-body h4 {
+        margin: 0;
+        font-size: 1rem;
+        font-family: var(--serif);
+      }
+
+      .photo-card-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        margin-top: 8px;
+        padding-top: 8px;
+        border-top: 1px solid var(--line);
+      }
+
+      /* Toast Notification */
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        padding: 14px 22px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        color: var(--ink);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+        z-index: 10000;
+        transform: translateY(80px);
+        opacity: 0;
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .toast.ok { border-color: #22c55e; }
+      .toast.err { border-color: #ef4444; }
+
+      @media (max-width: 900px) {
+        .metrics-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .metrics-grid {
           grid-template-columns: 1fr;
+        }
+        .admin-wrap {
+          padding-inline: 16px;
         }
       }
     </style>
   </head>
   <body>
     <main class="admin-wrap">
-      <a href="index.html" class="btn btn-secondary">← Portfolio</a>
-      <div class="admin-header">
-        <span class="muted">ADMIN · PROJECT FOTOGRAFER</span>
-        <h1>Verifikasi Akses</h1>
-        <p class="muted">
-          Terima atau tolak permintaan. Hanya admin yang boleh mengubah role
-          pengguna.
-        </p>
-      </div>
-
-      <div id="loginPanel" class="panel login-panel">
-        <h2>Login Admin</h2>
-        <form id="adminLogin" class="stack">
-          <input
-            id="adminEmail"
-            type="email"
-            placeholder="Email admin"
-            required
-          />
-          <div class="password-wrap">
-            <input
-              id="adminPassword"
-              class="password-input"
-              type="password"
-              placeholder="Password"
-              required
-            />
-            <button
-              type="button"
-              class="password-toggle"
-              data-target="adminPassword"
-              aria-label="Tampilkan password"
-            >
-              👁️
-            </button>
+      <!-- Topbar Header -->
+      <header class="admin-topbar">
+        <div class="admin-brand">
+          <span class="brand-mark">RK</span>
+          <div>
+            <h1>Admin Studio Fotografi</h1>
+            <small>Sistem Manajemen Izin & Galeri Privat</small>
           </div>
-          <button type="submit" class="btn btn-primary">Masuk</button>
-        </form>
-        <div id="loginStatus"></div>
-      </div>
+        </div>
 
-      <div id="dashboard" class="hidden">
-        <div class="admin-grid">
-          <aside class="panel">
-            <span class="muted">STATUS</span>
-            <h2 id="count">0 permintaan</h2>
-            <p class="muted">
-              Role: FEMALE, MALE, atau PUBLIC. Role yang disetujui tersimpan
-              pada akun.
-            </p>
-            <button id="logout" type="button" class="btn btn-secondary">
-              Keluar
-            </button>
-          </aside>
-          <section class="panel">
-            <div class="dashboard-header">
-              <h2>Permintaan masuk</h2>
-              <button id="refresh" type="button" class="btn btn-secondary">
-                Refresh
+        <div class="topbar-actions">
+          <a href="fotografer.html" class="btn btn-secondary">📸 Galeri Fotografer</a>
+          <a href="index.html" class="btn btn-secondary">🏠 Beranda</a>
+          <button id="logoutBtn" type="button" class="btn btn-secondary" style="display: none;">
+            🚪 Keluar
+          </button>
+        </div>
+      </header>
+
+      <!-- Panel Login Admin & Pengguna -->
+      <section id="loginPanel" class="panel login-container">
+        <div class="login-header">
+          <span class="badge badge-role">AUTENTIKASI</span>
+          <h2>Masuk ke Studio</h2>
+          <p class="muted">Gunakan email & password akun Anda</p>
+        </div>
+
+        <form id="adminLoginForm" class="form-stack" style="display: grid; gap: 14px;">
+          <label>
+            Email
+            <input
+              id="loginEmail"
+              type="email"
+              placeholder="nama@email.com"
+              required
+              autocomplete="email"
+            />
+          </label>
+
+          <label>
+            Password
+            <div class="password-wrap">
+              <input
+                id="loginPassword"
+                class="password-input"
+                type="password"
+                placeholder="Password akun"
+                required
+                autocomplete="current-password"
+              />
+              <button
+                type="button"
+                class="password-toggle"
+                data-target="loginPassword"
+                aria-label="Tampilkan password"
+              >
+                👁️
               </button>
             </div>
-            <div id="requests"></div>
-          </section>
+          </label>
+
+          <button id="submitLoginBtn" type="submit" class="btn btn-primary" style="margin-top: 6px;">
+            Masuk Sekarang ↗
+          </button>
+        </form>
+
+        <div id="loginFeedback" class="status" style="display: none; margin-top: 14px;"></div>
+
+        <div class="login-tip">
+          💡 <strong>Info:</strong> Anda bisa menggunakan akun biasa yang sudah dibuat di halaman Fotografer. Jika akun tersebut memiliki hak admin (seperti <code>workingpribadi@gmail.com</code>), dashboard admin akan otomatis terbuka.
         </div>
-      </div>
+      </section>
+
+      <!-- Panel Pengguna Biasa Masuk (Bukan Admin) -->
+      <section id="nonAdminNotice" class="panel login-container" style="display: none; text-align: center;">
+        <span style="font-size: 3rem; display: block; margin-bottom: 10px;">🔒</span>
+        <h2>Akses Terbatas</h2>
+        <p class="muted">
+          Anda sedang masuk sebagai <strong id="loggedUserEmail">-</strong>.<br />
+          Akun ini belum memiliki hak akses Admin.
+        </p>
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+          <a href="fotografer.html" class="btn btn-primary">Lihat Galeri Foto ↗</a>
+          <button id="switchAccountBtn" type="button" class="btn btn-secondary">Ganti Akun</button>
+        </div>
+      </section>
+
+      <!-- Dashboard Admin Lengkap -->
+      <section id="dashboardPanel" style="display: none;">
+        <!-- Metrics Cards -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-icon">⏳</div>
+            <div class="metric-info">
+              <h3 id="statPending">0</h3>
+              <p>Permintaan Menunggu</p>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon">👥</div>
+            <div class="metric-info">
+              <h3 id="statUsers">0</h3>
+              <p>Pengguna Terdaftar</p>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon">🖼️</div>
+            <div class="metric-info">
+              <h3 id="statPhotos">0</h3>
+              <p>Koleksi Foto</p>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon">👑</div>
+            <div class="metric-info">
+              <h3 style="font-size: 1.1rem; color: #22c55e;">Aktif</h3>
+              <p id="adminBadgeEmail">Admin</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="admin-tabs">
+          <button class="tab-btn active" data-tab="tabRequests">
+            📥 Permintaan Akses <span class="tab-badge" id="requestsCountBadge">0</span>
+          </button>
+          <button class="tab-btn" data-tab="tabUsers">
+            👥 Manajemen Pengguna
+          </button>
+          <button class="tab-btn" data-tab="tabPhotos">
+            🖼️ Kelola Galeri Foto
+          </button>
+          <button class="tab-btn" data-tab="tabGuide">
+            💡 Panduan & Format WA
+          </button>
+        </div>
+
+        <!-- TAB 1: PERMINTAAN AKSES -->
+        <div id="tabRequests" class="tab-pane active panel">
+          <div class="toolbar">
+            <div class="filter-group">
+              <button class="filter-chip active" data-filter="PENDING">Menunggu</button>
+              <button class="filter-chip" data-filter="APPROVED">Disetujui</button>
+              <button class="filter-chip" data-filter="REJECTED">Ditolak</button>
+              <button class="filter-chip" data-filter="ALL">Semua</button>
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+              <div class="search-box">
+                <span>🔍</span>
+                <input id="searchRequests" type="text" placeholder="Cari nama atau WhatsApp..." />
+              </div>
+              <button id="refreshRequestsBtn" type="button" class="btn btn-secondary" title="Segarkan Data">
+                🔄 Refresh
+              </button>
+            </div>
+          </div>
+
+          <div id="requestsListContainer">
+            <p class="muted">Memuat data permintaan...</p>
+          </div>
+        </div>
+
+        <!-- TAB 2: MANAJEMEN PENGGUNA -->
+        <div id="tabUsers" class="tab-pane panel">
+          <div class="toolbar">
+            <div>
+              <h3 style="margin: 0; font-family: var(--serif);">Daftar Pengguna Terdaftar</h3>
+              <p class="muted" style="margin: 4px 0 0; font-size: 0.85rem;">
+                Kelola hak akses role, verifikasi akun, atau angkat status admin langsung.
+              </p>
+            </div>
+            <button id="refreshUsersBtn" type="button" class="btn btn-secondary">
+              🔄 Refresh Pengguna
+            </button>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Pengguna / ID</th>
+                  <th>Role Akses</th>
+                  <th>Status Akun</th>
+                  <th>Admin?</th>
+                  <th>Aksi Cepat</th>
+                </tr>
+              </thead>
+              <tbody id="usersTableBody">
+                <tr>
+                  <td colspan="5" class="muted">Memuat daftar pengguna...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB 3: MANAJEMEN FOTO GALERI -->
+        <div id="tabPhotos" class="tab-pane panel">
+          <div class="toolbar">
+            <div>
+              <h3 style="margin: 0; font-family: var(--serif);">Koleksi Foto Galeri</h3>
+              <p class="muted" style="margin: 4px 0 0; font-size: 0.85rem;">
+                Tambah foto baru, atur role akses privat, dan kelola publikasi foto.
+              </p>
+            </div>
+            <button id="toggleAddPhotoBtn" type="button" class="btn btn-primary">
+              ➕ Tambah Foto Baru
+            </button>
+          </div>
+
+          <!-- Form Tambah Foto (Collapsible) -->
+          <div id="addPhotoFormWrap" class="panel" style="display: none; background: var(--panel); margin-bottom: 24px;">
+            <h4 style="margin: 0 0 14px; font-family: var(--serif);">Upload / Tambah Metadata Foto</h4>
+            <form id="newPhotoForm" style="display: grid; gap: 14px;">
+              <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 14px;">
+                <label>
+                  Judul Foto
+                  <input id="photoTitle" type="text" placeholder="Contoh: Portrait Wisuda UIN Gusdur" required />
+                </label>
+                <label>
+                  Role Akses Foto
+                  <select id="photoRole" class="role-select" style="width: 100%; height: 44px;" required>
+                    <option value="PUBLIC">🌐 PUBLIC (Dapat dilihat semua user terverifikasi)</option>
+                    <option value="MALE">👨 MALE (Hanya user Laki-laki + Umum)</option>
+                    <option value="FEMALE">👩 FEMALE (Hanya user Perempuan + Umum)</option>
+                  </select>
+                </label>
+              </div>
+
+              <label>
+                URL Tampilan Foto (Direct Link / Cloudinary / WebP)
+                <input id="photoUrl" type="url" placeholder="https://res.cloudinary.com/... atau URL gambar" required />
+              </label>
+
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <input id="photoPublished" type="checkbox" checked style="width: auto;" />
+                <span>Publikasikan sekarang (langsung terlihat di galeri fotografer sesuai role)</span>
+              </label>
+
+              <div style="display: flex; gap: 10px;">
+                <button type="submit" class="btn btn-primary">Simpan Foto ↗</button>
+                <button id="cancelPhotoBtn" type="button" class="btn btn-secondary">Batal</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Grid Daftar Foto -->
+          <div id="photosListGrid" class="photos-grid">
+            <p class="muted">Memuat foto...</p>
+          </div>
+        </div>
+
+        <!-- TAB 4: PANDUAN & FORMAT WHATSAPP -->
+        <div id="tabGuide" class="tab-pane panel">
+          <h3 style="margin-top: 0; font-family: var(--serif);">Panduan Manajemen Akses & Verifikasi</h3>
+          <div style="display: grid; gap: 18px; line-height: 1.6;">
+            <div>
+              <strong style="color: var(--accent);">1. Cara Kerja Role Akses:</strong>
+              <ul class="muted" style="margin: 6px 0 0; padding-left: 20px;">
+                <li><strong>🌐 PUBLIC:</strong> Dapat melihat semua foto kategori Umum.</li>
+                <li><strong>👨 MALE:</strong> Dapat melihat foto Laki-laki + Umum.</li>
+                <li><strong>👩 FEMALE:</strong> Dapat melihat foto Perempuan + Umum.</li>
+                <li>Hanya Admin yang berhak mengubah role akun pengunjung setelah disetujui.</li>
+              </ul>
+            </div>
+
+            <div>
+              <strong style="color: var(--accent);">2. Format Template WhatsApp:</strong>
+              <p class="muted" style="margin: 4px 0 0;">
+                Saat Anda mengklik tombol <strong>"✅ Terima"</strong> atau <strong>"❌ Tolak"</strong>, sistem otomatis membuka chat WhatsApp ke nomor pemohon dengan pesan sopan berikut:
+              </p>
+              <div style="background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin-top: 8px;">
+                <p style="margin: 0; font-size: 0.9rem;">
+                  <em>"Halo [Nama]! Permintaan akses galeri foto Anda telah disetujui dengan kategori [Role]. Silakan masuk kembali di web portofolio."</em>
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <strong style="color: var(--accent);">3. Menambah Foto Privat:</strong>
+              <p class="muted" style="margin: 4px 0 0;">
+                Gunakan tab <strong>"🖼️ Kelola Galeri Foto"</strong> untuk menambahkan link foto Cloudinary atau hosting foto lainnya. Pastikan memilih kategori akses yang tepat agar privasi foto tetap terjaga dengan aman.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <!-- Floating Toast Notification -->
+    <div id="adminToast" class="toast" aria-hidden="true">
+      <span id="toastIcon">✅</span>
+      <span id="toastMsg">Operasi berhasil</span>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/admin.js"></script>
   </body>
