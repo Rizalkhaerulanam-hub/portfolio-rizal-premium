@@ -1766,3 +1766,490 @@ footer .wrap {
     animation: none;
   }
 }
+
+
+/* =========================================================
+   SISTEM MOTION & ANIMASI LANJUTAN (motion.js)
+   ========================================================= */
+
+/* Transisi Halus Warna Tema */
+html,
+body {
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* 1. Scroll Progress Bar */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3.5px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), #e7be6e, #f9e2aa);
+  z-index: 10001;
+  pointer-events: none;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 12px rgba(168, 122, 47, 0.65);
+}
+
+/* 2. Header Entrance & Scroll State */
+header,
+.site-header {
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.6s ease;
+}
+
+header.is-scrolled,
+.site-header.is-scrolled {
+  box-shadow: 0 10px 30px rgba(10, 18, 32, 0.08);
+  border-bottom-color: color-mix(in srgb, var(--line) 75%, var(--accent));
+}
+
+[data-theme="dark"] header.is-scrolled,
+[data-theme="dark"] .site-header.is-scrolled {
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.5);
+}
+
+.motion-header-init {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.motion-header-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 3. Nav Links Underline Slide-in */
+nav a,
+.nav-menu .nav-link {
+  position: relative;
+  display: inline-block;
+  transition: color 0.25s ease;
+}
+
+nav a::after,
+.nav-menu .nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+nav a:hover::after,
+nav a.is-active::after,
+.nav-menu .nav-link:hover::after,
+.nav-menu .nav-link.is-active::after {
+  width: 100%;
+}
+
+nav a.is-active,
+.nav-menu .nav-link.is-active {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* 4. Page Load Sequence (Hero Elements) */
+.motion-hero-item-init {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.motion-hero-item-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.motion-photo-init {
+  opacity: 0;
+  transform: translateX(44px) scale(0.93);
+}
+
+.motion-photo-in {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  transition:
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.motion-chip-init {
+  opacity: 0;
+  transform: scale(0.35);
+}
+
+.motion-chip-in {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Animasi Melayang Halus Chip Badges */
+.chip {
+  animation: floatChip 4s ease-in-out infinite alternate;
+}
+.c1 { animation-delay: 0s; }
+.c2 { animation-delay: 1.3s; }
+.c3 { animation-delay: 2.6s; }
+
+@keyframes floatChip {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-7px); }
+}
+
+/* 5. Scroll-Triggered Section Entrance Transitions */
+.motion-eyebrow-init {
+  opacity: 0;
+  transform: translateY(12px);
+  letter-spacing: 0.04em;
+}
+
+.motion-eyebrow-in {
+  opacity: 1;
+  transform: translateY(0);
+  letter-spacing: 0.14em;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    letter-spacing 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Judul Section Clip-Path Reveal */
+.motion-h2-init {
+  opacity: 0;
+  transform: translateY(26px);
+  clip-path: inset(0 0 100% 0);
+}
+
+.motion-h2-in {
+  opacity: 1;
+  transform: translateY(0);
+  clip-path: inset(0 0 0% 0);
+  transition:
+    opacity 0.65s ease,
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.motion-sub-init {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.motion-sub-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.motion-para-init {
+  opacity: 0;
+  transform: translateX(-16px);
+}
+
+.motion-para-in {
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity 0.6s ease var(--para-delay, 0s),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) var(--para-delay, 0s);
+}
+
+.motion-card-init {
+  opacity: 0;
+  transform: translateY(38px) scale(0.96);
+}
+
+.motion-card-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.motion-trait-init {
+  opacity: 0;
+  transform: translateX(-32px);
+}
+
+.motion-trait-in {
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.motion-bq-init {
+  opacity: 0;
+  transform: translateY(24px) rotate(-1.5deg);
+}
+
+.motion-bq-in {
+  opacity: 1;
+  transform: translateY(0) rotate(0deg);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.motion-journey-init {
+  opacity: 0;
+  transform: translateY(26px);
+}
+
+.motion-journey-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.65s ease,
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 6. Card Hover & Shimmer Sweep */
+.card,
+.project-card {
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.card-shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.22) 50%,
+    transparent 65%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 6;
+}
+
+[data-theme="dark"] .card-shimmer {
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(214, 174, 98, 0.16) 50%,
+    transparent 65%
+  );
+}
+
+.card:hover .card-shimmer,
+.project-card:hover .card-shimmer {
+  transform: translateX(120%);
+}
+
+.thumb img,
+.project-image img {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover .thumb img,
+.project-card:hover .project-image img {
+  transform: scale(1.05);
+}
+
+/* 7. Button Interactivity & Elevation */
+.btn {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(15, 27, 51, 0.15);
+}
+
+.btn.primary:hover {
+  box-shadow: 0 12px 28px rgba(168, 122, 47, 0.32);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* 8. Anchor Nav Section Highlight Flash */
+.motion-section-flash {
+  animation: sectionFlash 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes sectionFlash {
+  0% {
+    background-color: transparent;
+  }
+  30% {
+    background-color: color-mix(in srgb, var(--accent) 8%, transparent);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+/* 9. Theme Toggle Ripple Effect */
+.theme-ripple {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  width: 0;
+  height: 0;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, var(--accent) 0%, transparent 72%);
+  opacity: 0.38;
+  transition:
+    width 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    height 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.8s ease;
+}
+
+.theme-ripple-active {
+  width: var(--ripple-size, 2000px);
+  height: var(--ripple-size, 2000px);
+  opacity: 0;
+}
+
+/* 10. Hero Floating Particles */
+.hero-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.32;
+  pointer-events: none;
+  animation: floatParticle linear infinite alternate;
+  filter: blur(0.5px);
+}
+
+@keyframes floatParticle {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.55;
+    transform: translateY(-22px) translateX(14px) scale(1.2);
+  }
+  100% {
+    transform: translateY(-44px) translateX(28px) scale(0.9);
+    opacity: 0.15;
+  }
+}
+
+/* 11. Page Transition Overlay (Pergantian Halaman) */
+.page-transition-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 99999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.page-transition-overlay.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 12. Input Focus Transitions */
+input,
+textarea {
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
+}
+
+input:focus,
+textarea:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(168, 122, 47, 0.15);
+}
+
+/* 13. Aksesibilitas: Mode Hemat Gerak (prefers-reduced-motion) */
+@media (prefers-reduced-motion: reduce) {
+  .motion-header-init,
+  .motion-hero-item-init,
+  .motion-photo-init,
+  .motion-chip-init,
+  .motion-eyebrow-init,
+  .motion-h2-init,
+  .motion-sub-init,
+  .motion-para-init,
+  .motion-card-init,
+  .motion-trait-init,
+  .motion-bq-init,
+  .motion-journey-init,
+  .motion-reduced {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    letter-spacing: inherit !important;
+    transition: none !important;
+  }
+
+  .scroll-progress-bar,
+  .hero-particle,
+  .theme-ripple,
+  .card-shimmer,
+  .page-transition-overlay {
+    display: none !important;
+  }
+
+  .chip {
+    animation: none !important;
+  }
+}
+
+
+/* =========================================================
+   SERTIFIKAT & JOURNEY ENHANCEMENTS
+   ========================================================= */
+.certs-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cert {
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s ease;
+}
+
+.cert:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 16px 32px rgba(168, 122, 47, 0.12);
+}

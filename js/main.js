@@ -8,13 +8,15 @@
   const menuButton = document.getElementById("menuToggle");
   const navMenu = document.getElementById("navMenu");
   const contactForm = document.getElementById("f");
-  const certTrigger = document.querySelector("[data-cert-modal]");
+  const certTriggers = document.querySelectorAll("[data-cert-modal]");
   const certModal = document.getElementById("certModal");
+  const certModalTitle = document.getElementById("certTitle");
+  const certModalImg = certModal?.querySelector("img");
   const closeCertButtons = document.querySelectorAll("[data-close-cert]");
   const cursorGlow = document.querySelector(".cursor-glow");
   let cursorTrail = document.querySelector(".cursor-trail");
   const revealItems = document.querySelectorAll(
-    ".reveal, .card, .trait, .bar, .proof-item, .social a",
+    ".reveal, .card, .trait, .bar, .proof-item, .social a, .cert",
   );
   const emailTujuan = "rizal.khaerulanam25028@mhs.uingusdur.ac.id";
 
@@ -72,8 +74,16 @@
     revealItems.forEach((item) => observer.observe(item));
   }
 
-  if (certTrigger && certModal) {
-    const openCertModal = () => {
+  if (certTriggers.length && certModal) {
+    const openCertModal = (e) => {
+      const btn = e.currentTarget;
+      const title = btn.getAttribute("data-cert-title");
+      const imgSrc = btn.getAttribute("data-cert-img");
+      if (title && certModalTitle) certModalTitle.textContent = title;
+      if (imgSrc && certModalImg) {
+        certModalImg.src = imgSrc;
+        certModalImg.alt = title || "Sertifikat";
+      }
       certModal.classList.add("is-open");
       certModal.setAttribute("aria-hidden", "false");
       document.body.classList.add("modal-open");
@@ -85,7 +95,7 @@
       document.body.classList.remove("modal-open");
     };
 
-    certTrigger.addEventListener("click", openCertModal);
+    certTriggers.forEach((btn) => btn.addEventListener("click", openCertModal));
     closeCertButtons.forEach((button) => {
       button.addEventListener("click", closeCertModal);
     });
