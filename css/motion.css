@@ -1,0 +1,1180 @@
+/* ==========================================================
+   motion.css — Animasi Elegan & Motion Design
+   Portfolio Rizal Khaerul Anam
+   Semua animasi menghormati prefers-reduced-motion
+   ========================================================== */
+
+/* ----------------------------------------------------------
+   VARIABEL TAMBAHAN UNTUK ANIMASI
+---------------------------------------------------------- */
+:root {
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 0.25s;
+  --duration-base: 0.45s;
+  --duration-slow: 0.7s;
+  --duration-slower: 1s;
+}
+
+/* ==========================================================
+   SCROLL PROGRESS BAR
+   Bar tipis di atas viewport menunjukkan progress scroll
+   ========================================================== */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2.5px;
+  width: 0%;
+  background: linear-gradient(
+    90deg,
+    var(--accent),
+    #e8c97a,
+    var(--accent)
+  );
+  background-size: 200% 100%;
+  z-index: 9999;
+  pointer-events: none;
+  transition: width 0.1s linear;
+  animation: progressGradient 3s linear infinite;
+  border-radius: 0 2px 2px 0;
+  box-shadow: 0 0 8px rgba(168, 122, 47, 0.5);
+}
+
+@keyframes progressGradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* ==========================================================
+   HEADER — ANIMASI SLIDE DOWN
+   ========================================================== */
+header {
+  transition:
+    background 0.4s var(--ease-smooth),
+    border-color 0.4s var(--ease-smooth),
+    box-shadow 0.4s var(--ease-smooth),
+    transform 0.6s var(--ease-out-expo);
+}
+
+.motion-header-init {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.motion-header-in {
+  transform: translateY(0);
+  opacity: 1;
+  transition:
+    transform 0.7s var(--ease-out-expo),
+    opacity 0.5s ease;
+}
+
+/* Header scrolled state — shadow tambahan */
+header.scrolled {
+  box-shadow: 0 4px 32px rgba(15, 27, 51, 0.09);
+}
+
+/* ==========================================================
+   NAV LINKS — UNDERLINE SLIDE DARI KIRI
+   ========================================================== */
+nav a {
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 1.5px;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.3s var(--ease-out-expo);
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+nav a:hover {
+  color: var(--ink) !important;
+}
+
+/* ==========================================================
+   LOGO MARK — HOVER EFFECT
+   ========================================================== */
+.mark {
+  transition:
+    background 0.3s ease,
+    transform 0.3s var(--ease-out-back),
+    box-shadow 0.3s ease;
+}
+
+.logo:hover .mark {
+  background: var(--accent);
+  color: var(--on-accent);
+  transform: rotate(-5deg) scale(1.1);
+  box-shadow: 0 6px 18px rgba(168, 122, 47, 0.3);
+}
+
+/* ==========================================================
+   BUTTONS — SCALE + GLOW PULSE ON HOVER
+   ========================================================== */
+.btn {
+  position: relative;
+  overflow: hidden;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.3s var(--ease-out-back),
+    box-shadow 0.3s ease !important;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 255, 255, 0.15),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px) scale(1.02) !important;
+}
+
+.btn:hover::before {
+  opacity: 1;
+}
+
+.btn:active {
+  transform: translateY(-1px) scale(0.99) !important;
+  transition-duration: 0.1s !important;
+}
+
+.btn.primary:hover {
+  box-shadow:
+    0 8px 24px rgba(168, 122, 47, 0.35),
+    0 0 0 3px rgba(168, 122, 47, 0.12) !important;
+}
+
+.btn.ghost:hover,
+.btn.btn-secondary:hover {
+  box-shadow: 0 8px 20px rgba(15, 27, 51, 0.12) !important;
+}
+
+/* Download CV Button */
+.cv {
+  position: relative;
+  overflow: hidden;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s var(--ease-out-back),
+    box-shadow 0.3s ease;
+}
+
+.cv:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(168, 122, 47, 0.25);
+}
+
+/* Theme Button */
+.tbtn {
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.4s var(--ease-out-back);
+}
+
+.tbtn:hover {
+  transform: rotate(20deg) scale(1.1);
+  border-color: var(--accent);
+  box-shadow: 0 0 16px rgba(168, 122, 47, 0.2);
+}
+
+/* ==========================================================
+   HERO ITEMS — PAGE LOAD SEQUENCE
+   ========================================================== */
+.motion-hero-item-init {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: none;
+}
+
+.motion-hero-item-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.7s var(--ease-out-expo),
+    transform 0.7s var(--ease-out-expo);
+}
+
+/* Hero Photo — masuk dari kanan dengan scale */
+.motion-photo-init {
+  opacity: 0;
+  transform: translateX(40px) scale(0.95);
+  transition: none;
+}
+
+.motion-photo-in {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  transition:
+    opacity 0.8s var(--ease-out-expo),
+    transform 0.9s var(--ease-out-expo);
+}
+
+/* Chip Badges — bounce pop */
+.motion-chip-init {
+  opacity: 0;
+  transform: scale(0.6);
+  transition: none;
+}
+
+.motion-chip-in {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 0.5s var(--ease-out-back),
+    transform 0.6s var(--ease-out-back);
+}
+
+/* Reduced motion fallback */
+.motion-reduced {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* ==========================================================
+   PHOTO CONTAINER — ENHANCED HOVER
+   ========================================================== */
+.photo {
+  transition:
+    transform 0.5s var(--ease-out-expo),
+    box-shadow 0.5s ease;
+}
+
+.photo:hover {
+  transform: translateY(-8px) rotate(0.5deg);
+  box-shadow:
+    0 32px 64px rgba(15, 27, 51, 0.18),
+    0 0 0 1px rgba(168, 122, 47, 0.1);
+}
+
+/* Photo glow ring */
+.photo::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(168, 122, 47, 0.3),
+    transparent 50%,
+    rgba(168, 122, 47, 0.15)
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 0;
+}
+
+.photo:hover::before {
+  opacity: 1;
+}
+
+/* ==========================================================
+   CHIP — FLOATING ANIMATION
+   ========================================================== */
+.chip {
+  animation: chipFloat 4s ease-in-out infinite;
+}
+
+.c1 { animation-delay: 0s; }
+.c2 { animation-delay: 1.3s; }
+.c3 { animation-delay: 0.7s; }
+
+@keyframes chipFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Dot pulse animation */
+.dot {
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(31, 157, 85, 0.4);
+    background: #1f9d55;
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(31, 157, 85, 0);
+    background: #22c55e;
+  }
+}
+
+/* ==========================================================
+   SOCIAL PROOF — ENHANCED
+   ========================================================== */
+.social-proof-above-fold {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.3s var(--ease-out-back),
+    box-shadow 0.3s ease;
+}
+
+.social-proof-above-fold::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(168, 122, 47, 0.04) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+.social-proof-above-fold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(168, 122, 47, 0.1);
+}
+
+.social-proof-above-fold:hover::before {
+  transform: translateX(100%);
+}
+
+.proof-number {
+  transition: transform 0.3s var(--ease-out-back);
+}
+
+.proof-item:hover .proof-number {
+  transform: scale(1.1);
+}
+
+/* ==========================================================
+   SECTION HEADING ANIMATIONS
+   ========================================================== */
+
+/* Eyebrow — fade + letter-spacing expand */
+.motion-eyebrow-init {
+  opacity: 0;
+  letter-spacing: 0.04em;
+  transform: translateY(12px);
+}
+
+.motion-eyebrow-in {
+  opacity: 1;
+  letter-spacing: 0.14em;
+  transform: translateY(0);
+  transition:
+    opacity 0.5s var(--ease-out-expo),
+    letter-spacing 0.6s var(--ease-smooth),
+    transform 0.5s var(--ease-out-expo);
+}
+
+/* H2 — clip-path reveal dari bawah ke atas */
+.motion-h2-init {
+  clip-path: inset(100% 0 0 0);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.motion-h2-in {
+  clip-path: inset(0% 0 0 0);
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    clip-path 0.7s var(--ease-out-expo),
+    opacity 0.5s ease,
+    transform 0.7s var(--ease-out-expo);
+}
+
+/* Sub heading */
+.motion-sub-init {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.motion-sub-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.6s var(--ease-out-expo),
+    transform 0.6s var(--ease-out-expo);
+  transition-delay: 0.15s;
+}
+
+/* Paragraf — fade + translateX */
+.motion-para-init {
+  opacity: 0;
+  transform: translateX(-14px);
+}
+
+.motion-para-in {
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity 0.6s var(--ease-out-expo),
+    transform 0.6s var(--ease-out-expo);
+  transition-delay: var(--para-delay, 0ms);
+}
+
+/* ==========================================================
+   CARDS — STAGGERED ENTRANCE + SHIMMER HOVER
+   ========================================================== */
+.motion-card-init {
+  opacity: 0;
+  transform: translateY(28px) scale(0.96);
+}
+
+.motion-card-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition:
+    opacity 0.6s var(--ease-out-expo),
+    transform 0.65s var(--ease-out-expo);
+}
+
+/* Card shimmer gradient sweep on hover */
+.card {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.08) 40%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.08) 60%,
+    transparent 80%
+  );
+  pointer-events: none;
+  z-index: 3;
+  transition: left 0.6s var(--ease-smooth);
+}
+
+.card:hover .card-shimmer {
+  left: 150%;
+}
+
+/* Card image zoom on hover */
+.thumb > img {
+  transition: transform 0.6s var(--ease-smooth);
+}
+
+.card:hover .thumb > img {
+  transform: scale(1.04);
+}
+
+/* Tags hover */
+.tags li {
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s var(--ease-out-back);
+}
+
+.tags li:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================
+   TRAITS — SLIDE DARI KIRI SATU PER SATU
+   ========================================================== */
+.motion-trait-init {
+  opacity: 0;
+  transform: translateX(-28px);
+}
+
+.motion-trait-in {
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity 0.55s var(--ease-out-expo),
+    transform 0.6s var(--ease-out-expo);
+}
+
+.trait {
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.3s var(--ease-out-back),
+    box-shadow 0.3s ease;
+}
+
+.trait:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  transform: translateX(6px);
+  box-shadow: 4px 0 0 0 var(--accent), 0 8px 24px rgba(168, 122, 47, 0.1);
+}
+
+.trait b {
+  transition: transform 0.3s var(--ease-out-back);
+}
+
+.trait:hover b {
+  transform: scale(1.15);
+}
+
+/* ==========================================================
+   BLOCKQUOTE — FADE + SLIGHT ROTATION
+   ========================================================== */
+.motion-bq-init {
+  opacity: 0;
+  transform: rotate(-2deg) translateY(20px);
+}
+
+.motion-bq-in {
+  opacity: 1;
+  transform: rotate(0deg) translateY(0);
+  transition:
+    opacity 0.7s var(--ease-out-expo),
+    transform 0.8s var(--ease-out-expo);
+}
+
+blockquote {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.3s var(--ease-out-back),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+blockquote::before {
+  content: "\201C";
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  font: italic 400 8rem var(--serif);
+  color: var(--accent);
+  opacity: 0.08;
+  line-height: 1;
+  pointer-events: none;
+}
+
+blockquote:hover {
+  transform: translateY(-4px) rotate(0.3deg);
+  box-shadow: 0 20px 48px rgba(168, 122, 47, 0.1);
+  border-color: var(--accent);
+}
+
+/* ==========================================================
+   JOURNEY TIMELINE
+   ========================================================== */
+.motion-journey-init {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.motion-journey-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.6s var(--ease-out-expo),
+    transform 0.65s var(--ease-out-expo);
+}
+
+/* Timeline border animated draw */
+.tl {
+  position: relative;
+  transition:
+    transform 0.3s var(--ease-out-back),
+    padding-left 0.3s ease;
+}
+
+.tl::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 0;
+  width: 4px;
+  height: 0%;
+  background: linear-gradient(180deg, var(--accent), rgba(168, 122, 47, 0.3));
+  border-radius: 2px;
+  transition: height 0.8s var(--ease-out-expo);
+}
+
+.tl.motion-journey-in::before {
+  height: 100%;
+}
+
+/* Timeline dot pulse */
+.tl::after {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: 8px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 0 rgba(168, 122, 47, 0.4);
+  animation: timelineDotPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes timelineDotPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(168, 122, 47, 0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(168, 122, 47, 0); }
+}
+
+.cert {
+  transition:
+    transform 0.3s var(--ease-out-back),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.cert:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(168, 122, 47, 0.1);
+  border-color: var(--accent);
+}
+
+/* ==========================================================
+   SKILL BARS — ENHANCED METER
+   ========================================================== */
+.meter {
+  position: relative;
+  overflow: visible;
+  height: 8px;
+  border-radius: 99px;
+  background: var(--panel);
+}
+
+.meter::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 99px;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 8px,
+    rgba(255, 255, 255, 0.05) 8px,
+    rgba(255, 255, 255, 0.05) 9px
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.meter i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--accent),
+    #e8c97a,
+    var(--accent)
+  );
+  background-size: 200% 100%;
+  border-radius: 99px;
+  position: relative;
+  animation: barShimmer 3s linear infinite;
+}
+
+.meter i::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow:
+    0 0 0 3px rgba(168, 122, 47, 0.15),
+    0 0 12px rgba(168, 122, 47, 0.4);
+}
+
+@keyframes barShimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.bar {
+  transition: transform 0.3s var(--ease-out-back);
+}
+
+.bar:hover {
+  transform: translateX(4px);
+}
+
+.bar:hover .bar .row b {
+  color: var(--ink);
+}
+
+/* ==========================================================
+   MARQUEE — ENHANCED TRACK
+   ========================================================== */
+.marquee {
+  position: relative;
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+.track span {
+  transition: color 0.2s ease;
+  cursor: default;
+}
+
+.track span:hover {
+  color: var(--accent);
+}
+
+/* ==========================================================
+   SECTION ENTRANCE FLASH
+   ========================================================== */
+@keyframes sectionFlash {
+  0% { background-color: transparent; }
+  20% { background-color: rgba(168, 122, 47, 0.05); }
+  100% { background-color: transparent; }
+}
+
+.motion-section-flash {
+  animation: sectionFlash 0.8s var(--ease-smooth);
+}
+
+/* ==========================================================
+   THEME RIPPLE EFFECT
+   ========================================================== */
+.theme-ripple {
+  position: fixed;
+  transform: translate(-50%, -50%) scale(0);
+  width: var(--ripple-size, 0px);
+  height: var(--ripple-size, 0px);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(168, 122, 47, 0.08) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 9997;
+}
+
+.theme-ripple-active {
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0.6s var(--ease-out-expo), opacity 0.6s ease;
+  opacity: 0;
+}
+
+/* ==========================================================
+   FLOATING PARTICLES DI HERO
+   ========================================================== */
+.hero-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(168, 122, 47, 0.55),
+    rgba(168, 122, 47, 0.1)
+  );
+  animation: particleFloat linear infinite;
+  pointer-events: none;
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(0px) translateX(0px) scale(1);
+    opacity: 0.15;
+  }
+  25% {
+    transform: translateY(-20px) translateX(12px) scale(1.1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-10px) translateX(-8px) scale(0.9);
+    opacity: 0.25;
+  }
+  75% {
+    transform: translateY(-28px) translateX(6px) scale(1.05);
+    opacity: 0.35;
+  }
+  100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+    opacity: 0.15;
+  }
+}
+
+/* ==========================================================
+   CONTACT SECTION — ENHANCED
+   ========================================================== */
+.mail {
+  position: relative;
+  display: inline-block;
+  transition:
+    color 0.25s ease,
+    transform 0.3s var(--ease-out-back);
+}
+
+.mail::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 1.5px;
+  background: var(--accent);
+  transition: width 0.4s var(--ease-out-expo);
+}
+
+.mail:hover {
+  transform: translateX(4px);
+}
+
+.mail:hover::after {
+  width: 100%;
+}
+
+.wa {
+  position: relative;
+  overflow: hidden;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.3s var(--ease-out-back),
+    box-shadow 0.3s ease;
+}
+
+.wa::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.wa:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(168, 122, 47, 0.25);
+}
+
+.wa:hover::before {
+  opacity: 1;
+}
+
+/* Form inputs */
+input,
+textarea {
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+input:focus,
+textarea:focus {
+  box-shadow: 0 0 0 3px rgba(168, 122, 47, 0.15) !important;
+}
+
+form {
+  transition:
+    transform 0.3s var(--ease-out-back),
+    box-shadow 0.3s ease;
+}
+
+form:focus-within {
+  box-shadow: 0 20px 48px rgba(168, 122, 47, 0.08);
+}
+
+form button {
+  position: relative;
+  overflow: hidden;
+  transition:
+    background 0.3s ease,
+    transform 0.3s var(--ease-out-back),
+    box-shadow 0.3s ease;
+}
+
+form button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(168, 122, 47, 0.3);
+}
+
+form button:hover::after {
+  opacity: 1;
+}
+
+/* ==========================================================
+   FOOTER — ENHANCED
+   ========================================================== */
+footer a {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+footer a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 0%;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s var(--ease-out-expo);
+}
+
+footer a:hover::after {
+  width: 100%;
+}
+
+footer a:hover {
+  color: var(--accent);
+}
+
+/* ==========================================================
+   SOCIAL ICONS — ENHANCED HOVER
+   ========================================================== */
+.social a,
+.social .social-icon {
+  position: relative;
+  overflow: hidden;
+  transition:
+    all 0.3s var(--ease-out-back) !important;
+}
+
+.social a::before,
+.social .social-icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent), #c99848);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0.5);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s var(--ease-out-back);
+  z-index: 0;
+}
+
+.social a:hover::before,
+.social .social-icon:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ==========================================================
+   GO BUTTON — ENHANCED
+   ========================================================== */
+.go {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.3s var(--ease-out-back),
+    box-shadow 0.3s ease,
+    background 0.3s ease !important;
+}
+
+.go::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.2),
+    transparent
+  );
+  transition: left 0.4s ease;
+}
+
+.go:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 24px rgba(168, 122, 47, 0.3) !important;
+}
+
+.go:hover::before {
+  left: 100%;
+}
+
+/* ==========================================================
+   CERT MODAL — ENHANCED ENTRANCE
+   ========================================================== */
+.cert-modal-backdrop {
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease !important;
+}
+
+.cert-modal {
+  transform: scale(0.92) translateY(20px);
+  transition: transform 0.4s var(--ease-out-back) !important;
+}
+
+.cert-modal-backdrop.is-open .cert-modal {
+  transform: scale(1) translateY(0);
+}
+
+.cert-modal-close {
+  transition:
+    background 0.2s ease,
+    transform 0.3s var(--ease-out-back),
+    border-color 0.2s ease;
+}
+
+.cert-modal-close:hover {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* ==========================================================
+   REVEAL ENHANCEMENT — LEBIH HALUS
+   ========================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.8s var(--ease-out-expo),
+    transform 0.8s var(--ease-out-expo) !important;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================
+   SECTION DIVIDER — SUBTLE GRADIENT LINE
+   ========================================================== */
+section {
+  position: relative;
+}
+
+section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(240px, 80%);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent),
+    transparent
+  );
+  opacity: 0.4;
+}
+
+/* ==========================================================
+   HERO SECTION — GRAIN TEXTURE SUBTLE
+   ========================================================== */
+.hero-bg-anim::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ==========================================================
+   HEADER SCROLLED STATE
+   ========================================================== */
+header.is-scrolled {
+  background: color-mix(in srgb, var(--bg) 95%, transparent);
+  box-shadow: 0 1px 24px rgba(15, 27, 51, 0.07);
+}
+
+/* ==========================================================
+   REDUCED MOTION — SEMUA ANIMASI DINONAKTIFKAN
+   ========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .motion-header-init,
+  .motion-hero-item-init,
+  .motion-photo-init,
+  .motion-chip-init,
+  .motion-eyebrow-init,
+  .motion-h2-init,
+  .motion-para-init,
+  .motion-sub-init,
+  .motion-card-init,
+  .motion-trait-init,
+  .motion-bq-init,
+  .motion-journey-init {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    transition: none !important;
+  }
+
+  .chip,
+  .dot,
+  .tl::after,
+  .hero-particle,
+  .meter i,
+  .scroll-progress-bar {
+    animation: none !important;
+  }
+
+  .card-shimmer,
+  .theme-ripple,
+  nav a::after,
+  .mail::after,
+  .go::before,
+  .photo::before {
+    display: none !important;
+  }
+}
