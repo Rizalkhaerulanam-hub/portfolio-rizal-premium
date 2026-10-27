@@ -236,6 +236,7 @@ function escapeHtml(v = "") {
 
 async function refreshAccount() {
   const requestAccessPanel = $("requestAccessPanel");
+  const toggleRequestAccessBtn = $("toggleRequestAccessBtn");
   const adminPortalBtn = $("adminPortalBtn");
   const topbarAdminBtn = $("topbarAdminBtn");
 
@@ -247,6 +248,7 @@ async function refreshAccount() {
     $("loggedOut").style.display = "";
     $("accountPanel").classList.remove("show");
     if (requestAccessPanel) requestAccessPanel.style.display = "none";
+    if (toggleRequestAccessBtn) toggleRequestAccessBtn.style.display = "none";
     if (adminPortalBtn) adminPortalBtn.style.display = "none";
     if (topbarAdminBtn) topbarAdminBtn.style.display = "none";
     return;
@@ -270,6 +272,7 @@ async function refreshAccount() {
       );
       if (adminPortalBtn) adminPortalBtn.style.display = "inline-flex";
       if (topbarAdminBtn) topbarAdminBtn.style.display = "inline-flex";
+      if (toggleRequestAccessBtn) toggleRequestAccessBtn.style.display = "none";
       if (requestAccessPanel) requestAccessPanel.style.display = "none";
       await loadGallery("PUBLIC");
       return;
@@ -282,6 +285,7 @@ async function refreshAccount() {
 
     if (p?.status === "APPROVED") {
       if (requestAccessPanel) requestAccessPanel.style.display = "none";
+      if (toggleRequestAccessBtn) toggleRequestAccessBtn.style.display = "none";
       status(
         $("accountStatus"),
         "Akses Anda sudah disetujui. Role ini tersimpan pada akun dan tidak dapat diubah oleh pengunjung.",
@@ -290,6 +294,8 @@ async function refreshAccount() {
       await loadGallery(p.access_role);
     } else if (p?.status === "REJECTED") {
       if (requestAccessPanel) requestAccessPanel.style.display = "block";
+      if (toggleRequestAccessBtn)
+        toggleRequestAccessBtn.style.display = "inline-flex";
       status(
         $("accountStatus"),
         "Permintaan akses Anda ditolak oleh admin. Silakan ajukan kembali dengan kategori yang sesuai.",
@@ -298,6 +304,8 @@ async function refreshAccount() {
       await loadGallery("NONE");
     } else {
       if (requestAccessPanel) requestAccessPanel.style.display = "block";
+      if (toggleRequestAccessBtn)
+        toggleRequestAccessBtn.style.display = "inline-flex";
       status(
         $("accountStatus"),
         "Permintaan Anda masih menunggu verifikasi admin.",
@@ -307,6 +315,7 @@ async function refreshAccount() {
     }
   } catch (e) {
     if (requestAccessPanel) requestAccessPanel.style.display = "none";
+    if (toggleRequestAccessBtn) toggleRequestAccessBtn.style.display = "none";
     status(
       $("accountStatus"),
       "Tidak dapat membaca status akun: " + e.message,
@@ -390,6 +399,12 @@ $("registerBtn").addEventListener("click", async () => {
     "Akun dibuat. Jika email confirmation aktif, cek email Anda lalu masuk.",
     "ok",
   );
+});
+
+$("toggleRequestAccessBtn")?.addEventListener("click", () => {
+  const panel = $("requestAccessPanel");
+  if (!panel) return;
+  panel.style.display = panel.style.display === "none" ? "block" : "none";
 });
 
 $("requestForm").addEventListener("submit", async (e) => {
