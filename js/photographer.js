@@ -4,6 +4,7 @@
 */
 const SUPABASE_URL = "https://ekbpgriafhiqvzwdywoc.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_ITJL59-5AGNuhNPHBO59og_GOzCPBI6";
+const GOOGLE_DRIVE_API_KEY = "AIzaSyBKdYKIk-fY3PwK_dvx8olTD2knXHTPwAA";
 
 const sb = window.supabase?.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 const $ = (id) => document.getElementById(id);
@@ -24,6 +25,62 @@ const ROLE_LABEL = {
   PENDING: "⏳ Menunggu verifikasi",
   NONE: "Belum memiliki izin",
 };
+
+const DRIVE_FOLDERS = {
+  umum: "ID_FOLDER_UMUM_DI_GOOGLE_DRIVE",
+  putra: "ID_FOLDER_PUTRA_DI_GOOGLE_DRIVE",
+  putri: "ID_FOLDER_PUTRI_DI_GOOGLE_DRIVE",
+};
+
+function getAllowedDriveFoldersFromRole(role) {
+  const normalized = String(role || "")
+    .trim()
+    .toLowerCase();
+
+  if (normalized === "umum" || normalized === "public") {
+    return [DRIVE_FOLDERS.umum, DRIVE_FOLDERS.putra, DRIVE_FOLDERS.putri];
+  }
+
+  if (normalized === "putra" || normalized === "male") {
+    return [DRIVE_FOLDERS.umum, DRIVE_FOLDERS.putra];
+  }
+
+  if (normalized === "putri" || normalized === "female") {
+    return [DRIVE_FOLDERS.umum, DRIVE_FOLDERS.putri];
+  }
+
+  return [DRIVE_FOLDERS.umum];
+}
+
+function driveConfigReady() {
+  const hasApiKey =
+    !!GOOGLE_DRIVE_API_KEY && !GOOGLE_DRIVE_API_KEY.startsWith("PASTE_");
+  const hasFolderIds = Object.values(DRIVE_FOLDERS).every(
+    (id) => !!id && !id.startsWith("ID_FOLDER_"),
+  );
+  return hasApiKey && hasFolderIds;
+}
+
+async function dapatkanAksesFolder(role = "") {
+  if (role) return getAllowedDriveFoldersFromRole(role);
+
+  if (!configured()) return [DRIVE_FOLDERS.umum];
+
+  try {
+    const {
+      data: { user },
+      error,
+    } = await sb.auth.getUser();
+    if (error || !user) return [DRIVE_FOLDERS.umum];
+
+    const profileRole =
+      user.user_metadata?.role || user.app_metadata?.role || "NONE";
+
+    return getAllowedDriveFoldersFromRole(profileRole);
+  } catch (e) {
+    return [DRIVE_FOLDERS.umum];
+  }
+}
 
 function status(el, text, kind = "wait") {
   el.textContent = text;
@@ -48,11 +105,74 @@ async function getProfile(userId) {
   return data;
 }
 
-async function loadGallery(role) {
+async function fetchGoogleDriveFiles(folderId) {
+  const url = `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(`'${folderId}' in parents and trashed = false`)}&fields=files(id,name,mimeType,webViewLink,thumbnailLink)&key=${GOOGLE_DRIVE_API_KEY}`;
+
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Gagal memuat folder Drive: ${response.status}`);
+  }
+
+  const json = await response.json();
+  return (json.files || []).filter((file) =>
+    file.mimeType?.startsWith("image/"),
+  );
+}
+
+function renderDriveGallery(files) {
+  const grid = $("galleryGrid");
+
+  if (!files.length) {
+    grid.innerHTML =
+      '<div class="locked"><div><strong>Belum ada foto.</strong><p class="muted">Koleksi untuk akses ini belum dipublikasikan.</p></div></div>';
+    return;
+  }
+
+  grid.innerHTML = files
+    .map(
+      (file) => `
+      <figure class="gallery-item">
+        <img src="https://drive.google.com/uc?export=view&id=${file.id}" alt="${escapeHtml(file.name || "Foto portfolio")}" loading="lazy">
+      </figure>`,
+    )
+    .join("");
+}
+
+async function loadDriveGallery(role) {
   const grid = $("galleryGrid");
   if (!role || role === "NONE" || role === "PENDING") {
     grid.innerHTML =
       '<div class="locked"><div><strong>🔒 Galeri terkunci</strong><p class="muted">Akses belum disetujui admin.</p></div></div>';
+    return;
+  }
+
+  const folderIds = getAllowedDriveFoldersFromRole(role);
+  const allFiles = [];
+
+  for (const folderId of folderIds) {
+    if (!folderId) continue;
+    try {
+      const files = await fetchGoogleDriveFiles(folderId);
+      allFiles.push(...files);
+    } catch (err) {
+      console.error("Drive gallery fetch failed:", err);
+    }
+  }
+
+  renderDriveGallery(allFiles);
+}
+
+async function loadGallery(role) {
+  const grid = $("galleryGrid");
+
+  if (!role || role === "NONE" || role === "PENDING") {
+    grid.innerHTML =
+      '<div class="locked"><div><strong>🔒 Galeri terkunci</strong><p class="muted">Akses belum disetujui admin.</p></div></div>';
+    return;
+  }
+
+  if (driveConfigReady()) {
+    await loadDriveGallery(role);
     return;
   }
 
@@ -115,6 +235,10 @@ function escapeHtml(v = "") {
 }
 
 async function refreshAccount() {
+  const requestAccessPanel = $("requestAccessPanel");
+  const adminPortalBtn = $("adminPortalBtn");
+  const topbarAdminBtn = $("topbarAdminBtn");
+
   if (!configured()) return;
   const {
     data: { user },
@@ -122,6 +246,9 @@ async function refreshAccount() {
   if (!user) {
     $("loggedOut").style.display = "";
     $("accountPanel").classList.remove("show");
+    if (requestAccessPanel) requestAccessPanel.style.display = "none";
+    if (adminPortalBtn) adminPortalBtn.style.display = "none";
+    if (topbarAdminBtn) topbarAdminBtn.style.display = "none";
     return;
   }
 
@@ -130,10 +257,31 @@ async function refreshAccount() {
 
   try {
     const p = await getProfile(user.id);
+    const isAdmin = Boolean(p?.is_admin);
     $("welcomeName").textContent = p?.full_name || user.email || "Pengunjung";
+
+    if (isAdmin) {
+      $("accountRole").textContent =
+        "Status: Admin · Akses: Semua kategori galeri";
+      status(
+        $("accountStatus"),
+        "Anda masuk sebagai admin. Semua galeri tersedia dan Anda dapat mengelola izin user dari dashboard.",
+        "ok",
+      );
+      if (adminPortalBtn) adminPortalBtn.style.display = "inline-flex";
+      if (topbarAdminBtn) topbarAdminBtn.style.display = "inline-flex";
+      if (requestAccessPanel) requestAccessPanel.style.display = "none";
+      await loadGallery("PUBLIC");
+      return;
+    }
+
     $("accountRole").textContent =
       `Status: ${p?.status || "PENDING"} · Akses: ${ROLE_LABEL[p?.access_role] || ROLE_LABEL.NONE}`;
+    if (adminPortalBtn) adminPortalBtn.style.display = "none";
+    if (topbarAdminBtn) topbarAdminBtn.style.display = "none";
+
     if (p?.status === "APPROVED") {
+      if (requestAccessPanel) requestAccessPanel.style.display = "none";
       status(
         $("accountStatus"),
         "Akses Anda sudah disetujui. Role ini tersimpan pada akun dan tidak dapat diubah oleh pengunjung.",
@@ -141,13 +289,15 @@ async function refreshAccount() {
       );
       await loadGallery(p.access_role);
     } else if (p?.status === "REJECTED") {
+      if (requestAccessPanel) requestAccessPanel.style.display = "block";
       status(
         $("accountStatus"),
-        "Permintaan akses Anda ditolak oleh admin. Hubungi admin jika perlu mengajukan kembali.",
+        "Permintaan akses Anda ditolak oleh admin. Silakan ajukan kembali dengan kategori yang sesuai.",
         "err",
       );
       await loadGallery("NONE");
     } else {
+      if (requestAccessPanel) requestAccessPanel.style.display = "block";
       status(
         $("accountStatus"),
         "Permintaan Anda masih menunggu verifikasi admin.",
@@ -156,6 +306,7 @@ async function refreshAccount() {
       await loadGallery("PENDING");
     }
   } catch (e) {
+    if (requestAccessPanel) requestAccessPanel.style.display = "none";
     status(
       $("accountStatus"),
       "Tidak dapat membaca status akun: " + e.message,
@@ -251,7 +402,7 @@ $("requestForm").addEventListener("submit", async (e) => {
   if (!user)
     return status(
       $("requestStatus"),
-      "Silakan masuk/daftar terlebih dahulu.",
+      "Silakan login terlebih dahulu untuk mengajukan izin galeri.",
       "err",
     );
 

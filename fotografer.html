@@ -471,12 +471,18 @@
           title="Kembali ke portfolio"
           >RK</a
         >
-        <div style="display:flex;gap:10px;align-items:center;">
+        <div style="display: flex; gap: 10px; align-items: center">
           <a
             id="topbarAdminBtn"
             href="admin.html"
             class="btn btn-secondary"
-            style="display:none;padding:8px 16px;border-color:var(--accent);color:var(--accent);font-weight:600;"
+            style="
+              display: none;
+              padding: 8px 16px;
+              border-color: var(--accent);
+              color: var(--accent);
+              font-weight: 600;
+            "
             >⚙️ Dashboard Admin</a
           >
           <a
@@ -561,12 +567,16 @@
               <div id="authStatus" class="status"></div>
             </div>
 
-            <div class="panel panel--spaced reveal">
+            <div
+              id="requestAccessPanel"
+              class="panel panel--spaced reveal"
+              style="display: none"
+            >
               <span class="eyebrow">Belum punya izin?</span>
               <h2>Ajukan akses</h2>
               <p class="muted">
-                Pilihan ini hanya berlaku sebagai permintaan. Kategori final
-                ditetapkan oleh admin.
+                Setelah Anda login, pilih kategori yang Anda inginkan. Admin
+                akan menilai dan menentukan izin final.
               </p>
 
               <form id="requestForm" class="form-stack" novalidate>
@@ -634,7 +644,12 @@
                   id="adminPortalBtn"
                   href="admin.html"
                   class="btn btn-primary"
-                  style="display:none;background:linear-gradient(135deg,var(--accent),#e5b964);color:#0a1220;font-weight:700;"
+                  style="
+                    display: none;
+                    background: linear-gradient(135deg, var(--accent), #e5b964);
+                    color: #0a1220;
+                    font-weight: 700;
+                  "
                   >⚙️ Masuk Dashboard Admin</a
                 >
                 <button id="refreshBtn" class="btn btn-secondary" type="button">

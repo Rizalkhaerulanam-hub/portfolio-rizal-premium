@@ -1589,16 +1589,41 @@ footer .wrap {
   border-radius: 999px;
   border: 1px solid var(--accent);
   font-weight: 600;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .btn-primary {
-  background: var(--accent);
+  background: linear-gradient(135deg, var(--accent), #c99840);
   color: var(--on-accent);
+  box-shadow: 0 12px 24px rgba(168, 122, 47, 0.22);
 }
 
 .btn-secondary {
   background: transparent;
   color: var(--accent);
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform: translateY(-1px);
+}
+
+#requestAccessPanel,
+#accountPanel {
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+#requestAccessPanel {
+  background: linear-gradient(180deg, var(--surface), var(--panel));
+}
+
+#accountPanel .panel {
+  background: linear-gradient(180deg, var(--surface), rgba(168, 122, 47, 0.05));
 }
 
 .page-footer {
@@ -1767,7 +1792,6 @@ footer .wrap {
   }
 }
 
-
 /* =========================================================
    SISTEM MOTION & ANIMASI LANJUTAN (motion.js)
    ========================================================= */
@@ -1775,7 +1799,9 @@ footer .wrap {
 /* Transisi Halus Warna Tema */
 html,
 body {
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
 }
 
 /* 1. Scroll Progress Bar */
@@ -1902,13 +1928,23 @@ nav a.is-active,
 .chip {
   animation: floatChip 4s ease-in-out infinite alternate;
 }
-.c1 { animation-delay: 0s; }
-.c2 { animation-delay: 1.3s; }
-.c3 { animation-delay: 2.6s; }
+.c1 {
+  animation-delay: 0s;
+}
+.c2 {
+  animation-delay: 1.3s;
+}
+.c3 {
+  animation-delay: 2.6s;
+}
 
 @keyframes floatChip {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-7px); }
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-7px);
+  }
 }
 
 /* 5. Scroll-Triggered Section Entrance Transitions */
@@ -2230,7 +2266,6 @@ textarea:focus {
     animation: none !important;
   }
 }
-
 
 /* =========================================================
    SERTIFIKAT & JOURNEY ENHANCEMENTS
