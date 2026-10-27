@@ -1,0 +1,8 @@
+{
+  "chat.tools.terminal.autoApprove": {
+    "/^cd /d/portfolio-rizal-premium; node --check js/photographer\\.js$/": {
+      "approve": true,
+      "matchCommandLine": true
+    }
+  }
+}

@@ -98,7 +98,7 @@ function configured() {
 async function getProfile(userId) {
   const { data, error } = await sb
     .from("profiles")
-    .select("id,full_name,access_role,status")
+    .select("id,full_name,access_role,status,is_admin")
     .eq("id", userId)
     .maybeSingle();
   if (error) throw error;
@@ -106,11 +106,30 @@ async function getProfile(userId) {
 }
 
 async function fetchGoogleDriveFiles(folderId) {
-  const url = `https://www.googleapis.com/drive/v3/files?q=${encodeURIComponent(`'${folderId}' in parents and trashed = false`)}&fields=files(id,name,mimeType,webViewLink,thumbnailLink)&key=${GOOGLE_DRIVE_API_KEY}`;
+  const url = new URL("https://www.googleapis.com/drive/v3/files");
+  url.searchParams.set(
+    "q",
+    `'${folderId}' in parents and trashed = false and mimeType contains 'image/'`,
+  );
+  url.searchParams.set(
+    "fields",
+    "files(id,name,mimeType,webViewLink,thumbnailLink,webContentLink)",
+  );
+  url.searchParams.set("key", GOOGLE_DRIVE_API_KEY);
+  url.searchParams.set("supportsAllDrives", "true");
+  url.searchParams.set("includeItemsFromAllDrives", "true");
+  url.searchParams.set("corpora", "allDrives");
 
-  const response = await fetch(url);
+  const response = await fetch(url.toString());
   if (!response.ok) {
-    throw new Error(`Gagal memuat folder Drive: ${response.status}`);
+    let detail = "";
+    try {
+      const errJson = await response.json();
+      detail = errJson?.error?.message ? `: ${errJson.error.message}` : "";
+    } catch {
+      detail = "";
+    }
+    throw new Error(`Gagal memuat folder Drive (${response.status})${detail}`);
   }
 
   const json = await response.json();
@@ -124,7 +143,7 @@ function renderDriveGallery(files) {
 
   if (!files.length) {
     grid.innerHTML =
-      '<div class="locked"><div><strong>Belum ada foto.</strong><p class="muted">Koleksi untuk akses ini belum dipublikasikan.</p></div></div>';
+      '<div class="locked"><div><strong>Belum ada foto.</strong><p class="muted">Folder Drive belum dipublikasikan atau file di folder belum ada.</p></div></div>';
     return;
   }
 
@@ -132,7 +151,7 @@ function renderDriveGallery(files) {
     .map(
       (file) => `
       <figure class="gallery-item">
-        <img src="https://drive.google.com/uc?export=view&id=${file.id}" alt="${escapeHtml(file.name || "Foto portfolio")}" loading="lazy">
+        <img src="${file.webContentLink || `https://drive.google.com/uc?export=view&id=${file.id}`}" alt="${escapeHtml(file.name || "Foto portfolio")}" loading="lazy">
       </figure>`,
     )
     .join("");
@@ -148,6 +167,7 @@ async function loadDriveGallery(role) {
 
   const folderIds = getAllowedDriveFoldersFromRole(role);
   const allFiles = [];
+  let fetchError = null;
 
   for (const folderId of folderIds) {
     if (!folderId) continue;
@@ -156,7 +176,14 @@ async function loadDriveGallery(role) {
       allFiles.push(...files);
     } catch (err) {
       console.error("Drive gallery fetch failed:", err);
+      fetchError = err;
     }
+  }
+
+  if (!allFiles.length && fetchError) {
+    grid.innerHTML =
+      '<div class="locked"><div><strong>Galeri Drive tidak bisa dibuka.</strong><p class="muted">Periksa apakah folder sudah dibagikan publik, Drive API aktif, dan key API tidak dibatasi ke domain tertentu.</p></div></div>';
+    return;
   }
 
   renderDriveGallery(allFiles);
