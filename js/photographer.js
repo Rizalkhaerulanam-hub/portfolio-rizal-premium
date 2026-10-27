@@ -27,9 +27,9 @@ const ROLE_LABEL = {
 };
 
 const DRIVE_FOLDERS = {
-  umum: "ID_FOLDER_UMUM_DI_GOOGLE_DRIVE",
-  putra: "ID_FOLDER_PUTRA_DI_GOOGLE_DRIVE",
-  putri: "ID_FOLDER_PUTRI_DI_GOOGLE_DRIVE",
+  umum: "14QtfF_4dfYDH6iaTSFgm_g6GdDoiCV6U",
+  putra: "1GJubD5ldSqSCowPGBxWq8gSEpA4ky1Tm",
+  putri: "1Lfx2OK7TjCAQUTQlo_p561mIQI6YdFxr",
 };
 
 function getAllowedDriveFoldersFromRole(role) {
